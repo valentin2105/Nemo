@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/sessions"
 )
 
+// SetSessionStore - store session
 func SetSessionStore(sessionStore sessions.Store) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
