@@ -29,6 +29,7 @@ type Application struct {
 	sessionStore sessions.Store
 }
 
+// MiddlewareStruct - Call middlewares
 func (app *Application) MiddlewareStruct() (*interpose.Middleware, error) {
 	middle := interpose.New()
 	middle.Use(middlewares.SetSessionStore(app.sessionStore))

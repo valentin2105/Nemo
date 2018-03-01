@@ -15,7 +15,7 @@ type Node struct {
 	Schedulable bool
 }
 
-// Node - list of node
+// NodeList- list of node
 type NodeList []Node
 
 // ListNodes - return a list of nodes
