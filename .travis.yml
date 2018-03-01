@@ -1,7 +1,13 @@
+sudo: required
+
 language: go
 go:
  - 1.10.0
 
+services:
+  - docker
+
 script:
  - go test -v ./...
  - CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o Nemo .
+ - docker build -t valentinnc/nemo .
