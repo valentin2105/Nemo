@@ -15,7 +15,7 @@
 `Nemo` is writted in Golang and use a `kubeconfig` file to talk to Kubernetes.
 
 ## How-to use ?
-It can be launched on your local machine or run in a Kubernetes cluster using `ServiceAccount` and `RBAC` deployed easily with `Helm`.
+It can be launched on your local machine :
 
 ```
 # local
@@ -24,6 +24,7 @@ cd Nemo/ && wget https://...
 chmod +x Nemo
 ./Nemo --kubeconfig /home/user/.kube/config
 ```
+Or, it can run in a Kubernetes cluster using `ServiceAccount` and `RBAC` deployed easily with `Helm`.
 
 ```
 # Kubernetes
