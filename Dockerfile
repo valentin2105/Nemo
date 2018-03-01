@@ -10,6 +10,7 @@ ENV COOKIE_SECRET xxe7wmUJN1H-7Lfa
 ADD . /go/src/github.com/valentin2105/Nemo
 
 WORKDIR /go/src/github.com/valentin2105/Nemo
+RUN 	godep get
 RUN 	godep go build
 
 FROM alpine:latest
