@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"net/http"
 	"time"
 
@@ -26,6 +27,7 @@ func newConfig() (*viper.Viper, error) {
 }
 
 func main() {
+	flag.Parse()
 	config, err := newConfig()
 	if err != nil {
 		logrus.Fatal(err)

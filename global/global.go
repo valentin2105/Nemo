@@ -18,7 +18,7 @@ func TrimQuotes(s string) string {
 	return s
 }
 
-func ChooseFaIcon(s string) string {
+func ChooseStatusFaIcon(s string) string {
 	if s == "Running" {
 		e := "fa-circle success"
 		return e

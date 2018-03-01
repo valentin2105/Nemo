@@ -15,10 +15,18 @@
     <script src="/project/js/table-sort.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <script src="/project/js/footer.js"></script>
+
+    <script>
+
+    </script>
+
 
   </head>
 
   <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <i class="fa fa-compass info navbar-brand" ></i><a class="navbar-brand" href="/"> Nemo</a>
@@ -27,9 +35,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <ul class="navbar-nav mr-auto nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="/"><i class="fas fa-home"></i> <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/pods">Pods</a>
@@ -47,17 +55,29 @@
               <a class="nav-link" href="/secrets">Secrets</a>
             </li>
           </ul>
+
+          <ul class="navbar-nav mr-sm-2 nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/create/resources"><i style="font-size: 20px;" class="fa fa-cloud-upload-alt"></i><span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
           <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
           </form>
         </div>
       </div>
     </nav>
 
-
         {{template "content" .}}
 
   </body>
+
+
+    <footer class="footer">
+      <div class="container">
+        <a href="https://github.com/valentin2105/Nemo"><i class="fab fa-github"></a></i><span class="text-muted">    2018. Nemo Kubernetes UI</span>
+      </div>
+    </footer>
 
   </html>
