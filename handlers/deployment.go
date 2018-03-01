@@ -9,6 +9,7 @@ import (
 	"github.com/valentin2105/Nemo/libhttp"
 )
 
+// GetDeployments - Generate the deployment list view
 func GetDeployments(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	deployment := global.ListDeployments()

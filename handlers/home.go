@@ -9,6 +9,7 @@ import (
 	"github.com/valentin2105/Nemo/libhttp"
 )
 
+// GetHome - Generate the home view
 func GetHome(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	nodes := global.ListNodes()
