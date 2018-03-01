@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
@@ -11,7 +12,7 @@ import (
 type Secret struct {
 	Name      string
 	Namespace string
-	Age       string
+	Created   string
 }
 
 type SecretList []Secret
@@ -34,11 +35,13 @@ func ListSecrets() SecretList {
 		// Namespace
 		ns := fmt.Sprintf("%q", *secrets.Metadata.Namespace)
 		nsc := TrimQuotes(ns)
-		//Age
-		a := fmt.Sprintf("%q", *secrets.Metadata.CreationTimestamp)
-		ac := TrimQuotes(a)
+		//Created
+		c := secrets.Metadata.GetCreationTimestamp()
+		cs := c.GetSeconds()
+		csc := time.Unix(cs, 0)
+		cscf := csc.Format(DefaultDateFormat)
 		// Put in slice
-		p := Secret{Name: nc, Namespace: nsc, Age: ac}
+		p := Secret{Name: nc, Namespace: nsc, Created: cscf}
 		pl = append(pl, p)
 	}
 	return pl

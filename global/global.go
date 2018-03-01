@@ -2,6 +2,8 @@ package global
 
 import "os"
 
+const DefaultDateFormat = "Mon Jan _2 2006 - 15:04"
+
 func GetEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value

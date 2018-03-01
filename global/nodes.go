@@ -38,7 +38,10 @@ func ListNodes() NodeList {
 		//Name
 		n := fmt.Sprintf("%q", *node.Metadata.Name)
 		nc := TrimQuotes(n)
-		// Schedule
+
+		//Spec
+		//sp := node.Status.GetAllocatable()
+
 		sch := !*node.Spec.Unschedulable
 		// Put in slice
 		no := Node{Status: st, Name: nc, Schedulable: sch}
