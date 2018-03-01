@@ -16,9 +16,9 @@ import (
 func newConfig() (*viper.Viper, error) {
 	c := viper.New()
 	c.SetDefault("cookie_secret", "xxe7wmUJN1H-7Lfa")
-	c.SetDefault("http_addr", ":8888")
-	c.SetDefault("http_cert_file", "")
-	c.SetDefault("http_key_file", "")
+	c.SetDefault("http_addr", ":443")
+	c.SetDefault("http_cert_file", "tls/fullchain.pem")
+	c.SetDefault("http_key_file", "tls/privkey.pem")
 	c.SetDefault("http_drain_interval", "1s")
 
 	c.AutomaticEnv()
