@@ -10,4 +10,4 @@ kubectl config set-context default-context --cluster=k8s --user=scheduler
 kubectl config use-context default-context
 kubectl get cs
 
-./Nemo --kubeconfig=/root/.kube/config 
+./Nemo --kubeconfig=/root/.kube/config --addr :8080
