@@ -8,14 +8,17 @@ import (
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
+// Node - kubectl get node
 type Node struct {
 	Status      string
 	Name        string
 	Schedulable bool
 }
 
+// Node - list of node
 type NodeList []Node
 
+// ListNodes - return a list of nodes
 func ListNodes() NodeList {
 	nl := make(NodeList, 0)
 	client, err := LoadClient(Kubeconfig)

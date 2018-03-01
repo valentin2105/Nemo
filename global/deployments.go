@@ -10,6 +10,7 @@ import (
 	appsv1beta1 "github.com/ericchiang/k8s/apis/apps/v1beta1"
 )
 
+// Deployment - kubectl get deployments
 type Deployment struct {
 	Status     string
 	Name       string
@@ -19,8 +20,10 @@ type Deployment struct {
 	Image      string
 }
 
+// DeploymentList - list of deployments
 type DeploymentList []Deployment
 
+// ListDeployments - return a list of deploys
 func ListDeployments() DeploymentList {
 	dl := make(DeploymentList, 0)
 	client, err := LoadClient(Kubeconfig)

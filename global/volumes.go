@@ -9,6 +9,7 @@ import (
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
+// PVC - kubectl get pvc
 type PVC struct {
 	Name      string
 	Namespace string
@@ -17,6 +18,7 @@ type PVC struct {
 	Scope     string
 }
 
+// PV - kubectl get pv
 type PV struct {
 	Name   string
 	Size   string
@@ -24,9 +26,13 @@ type PV struct {
 	Scope  string
 }
 
+// PVClist - list of pvc
 type PVClist []PVC
+
+// PVlist - list of pv
 type PVlist []PV
 
+// ListPVC - return pvc list
 func ListPVC() PVClist {
 	pvcl := make(PVClist, 0)
 	client, err := LoadClient(Kubeconfig)
@@ -58,6 +64,7 @@ func ListPVC() PVClist {
 	return pvcl
 }
 
+// ListPV - return pv list
 func ListPV() PVlist {
 	pvl := make(PVlist, 0)
 	client, err := LoadClient(Kubeconfig)

@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 )
 
+// RandString -- Randomize string
 func RandString(n int) string {
 	const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-"
 

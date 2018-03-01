@@ -8,6 +8,7 @@ import (
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
+// Pod - kubectl get pod
 type Pod struct {
 	Status    string
 	Name      string
@@ -17,8 +18,10 @@ type Pod struct {
 	Image     string
 }
 
+// PodList - list of pod
 type PodList []Pod
 
+// ListPods - return a list of pod
 func ListPods() PodList {
 	pl := make(PodList, 0)
 	client, err := LoadClient(Kubeconfig)
@@ -51,6 +54,7 @@ func ListPods() PodList {
 	return pl
 }
 
+// GetPod - describe a pod
 func GetPod(ns string, name string) Pod {
 	var p Pod
 	client, err := LoadClient(Kubeconfig)

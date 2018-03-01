@@ -13,19 +13,22 @@ import (
 )
 
 var (
+	//Kubeconfig - Kubernetes configuration file path
 	Kubeconfig = flag.String("kubeconfig", "/root/.kube/config", "KubeConfig Path")
 )
 
+// ComponentStatus - kubectl get cs
 type ComponentStatus struct {
 	Name   string
 	Status string
 }
 
+// ComponentStatusList - List of cs
 type ComponentStatusList []ComponentStatus
 
+// LoadClient - Create kubernetes connexion client
 func LoadClient(kubeconfigPath *string) (*k8s.Client, error) {
 	flag.Parse()
-
 	path := string(*kubeconfigPath)
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -39,6 +42,7 @@ func LoadClient(kubeconfigPath *string) (*k8s.Client, error) {
 	return k8s.NewClient(&config)
 }
 
+// ListComponentStatus - Return a cs list
 func ListComponentStatus() ComponentStatusList {
 	nl := make(ComponentStatusList, 0)
 	client, err := LoadClient(Kubeconfig)

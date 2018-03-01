@@ -9,14 +9,17 @@ import (
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
+// Configmap - kubectl get configmap
 type Configmap struct {
 	Name      string
 	Namespace string
 	Created   string
 }
 
+// ConfigMapList - list of configmaps
 type ConfigmapList []Configmap
 
+// ListConfigmaps - return a cm list
 func ListConfigmaps() ConfigmapList {
 	pl := make(ConfigmapList, 0)
 	client, err := LoadClient(Kubeconfig)

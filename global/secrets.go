@@ -9,14 +9,17 @@ import (
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
+// Secret - kubectl get secret
 type Secret struct {
 	Name      string
 	Namespace string
 	Created   string
 }
 
+// SecretList - list of secret
 type SecretList []Secret
 
+// ListSecrets - return a list of secret
 func ListSecrets() SecretList {
 	pl := make(SecretList, 0)
 	client, err := LoadClient(Kubeconfig)

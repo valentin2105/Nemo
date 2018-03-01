@@ -59,6 +59,7 @@ func main() {
 		Timeout: drainInterval,
 		Server:  &http.Server{Addr: serverAddress, Handler: middle},
 	}
+
 	version := global.GetEnv("KUBERNETES_VERSION", "v1.9")
 
 	if certFile != "" && keyFile != "" {

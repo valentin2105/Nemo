@@ -2,8 +2,10 @@ package global
 
 import "os"
 
+// DefaultDateFormat - Date default format
 const DefaultDateFormat = "Mon Jan _2 2006 - 15:04"
 
+// GetEnv - return env w/ fallback string
 func GetEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
@@ -11,6 +13,7 @@ func GetEnv(key, fallback string) string {
 	return fallback
 }
 
+// TrimQuotes - get of quotes of string
 func TrimQuotes(s string) string {
 	if len(s) >= 2 {
 		if s[0] == '"' && s[len(s)-1] == '"' {
@@ -20,6 +23,7 @@ func TrimQuotes(s string) string {
 	return s
 }
 
+// ChooseStatusFaIcon - Choose a fa-icon in case of string arg
 func ChooseStatusFaIcon(s string) string {
 	if s == "Running" {
 		e := "fa-circle success"
