@@ -1,0 +1,49 @@
+.modal-dialog {
+    z-index: 1100;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+i.failed {
+    color: red;
+}
+
+i.success {
+    color: #00a300;
+}
+
+i.NotReady {
+    color: red;
+}
+
+i.Ready {
+    color: #00a300;
+}
+
+i.Healthy {
+    color: #00a300;
+}
+
+i.Unhealthy {
+    color: red;
+}
+
+
+i.info {
+    color: white;
+}
+i.navbar-brand {
+    margin-top: 2px;
+}
+
+.fa {
+  margin-right: 6px;
+}
+
+a {
+  color: #000000;
+}

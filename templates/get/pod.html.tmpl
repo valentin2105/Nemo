@@ -1,0 +1,31 @@
+{{define "content"}}
+<br>
+<div class="container">
+  <center>
+    <div class="jumbotron">
+      <h2><i class="fa fa-box"></i> {{ .Name }}</h2>
+      <br>
+      <h5>{{ .Namespace }}</h5>
+    </div>
+  </center>
+  </div>
+
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        Pod Description
+      </div>
+    <div class="card-body">
+      {{ if eq .Status "Running" }}
+      <h4 class="card-title"><span class="badge badge-pill badge-success">{{.Status}}</span></h4>
+      <h5 class="card-title"><span class="badge badge-pill badge-primary">{{.Worker}}</span></h5>
+      <h5 class="card-title"><span class="badge badge-pill badge-dark">{{.Ip}}</span></h5>
+      {{ else }}
+      <h4 class="card-title"><span class="badge badge-pill badge-danger">{{.Status}}</span></h4>
+      <h5 class="card-title"><span class="badge badge-pill badge-primary">{{.Worker}}</span></h5>
+      {{ end }}
+      <h5 class="card-title"><span class="badge badge-pill badge-light">{{ .Image }}</span></h5>
+      </div>
+    </div>
+</div>
+{{end}}
