@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	addr    = flag.String("addr", ":8080", "Address / Port to bind on (default: :8080)")
+	addr    = flag.String("addr", ":8080", "Address / Port to bind on")
 	tlscert = flag.String("tlscert", "", "TLS Certificate for HTTPS server (optional)")
 	tlskey  = flag.String("tlskey", "", "TLS Private KEY for HTTPS server (optional)")
 )
@@ -34,17 +34,14 @@ func main() {
 	if err != nil {
 		logrus.Fatal(err)
 	}
-
 	app, err := application.New(config)
 	if err != nil {
 		logrus.Fatal(err)
 	}
-
 	middle, err := app.MiddlewareStruct()
 	if err != nil {
 		logrus.Fatal(err)
 	}
-
 	serverAddress := *addr
 	certFile := *tlscert
 	keyFile := *tlskey

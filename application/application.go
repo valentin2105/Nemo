@@ -55,6 +55,12 @@ func (app *Application) mux() *gorilla_mux.Router {
 		name := vars["name"]
 		handlers.GetAnyPod(w, r, ns, name)
 	}).Methods("GET")
+	router.HandleFunc("/get/{namespace}/deployment/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		ns := vars["namespace"]
+		name := vars["name"]
+		handlers.GetAnyPod(w, r, ns, name)
+	}).Methods("GET")
 
 	// Path of static files must be last!
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))

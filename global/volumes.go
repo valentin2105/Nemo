@@ -81,7 +81,7 @@ func ListPV() PVlist {
 		n := fmt.Sprintf("%q", *PVs.Metadata.Name)
 		nc := TrimQuotes(n)
 		// Status
-		si := PVs.Spec.Size()
+		si := PVs.Status.Size()
 		sic := strconv.Itoa(si)
 		// Status
 		s := fmt.Sprintf("%q", PVs.Status.GetPhase())
