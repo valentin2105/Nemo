@@ -38,6 +38,6 @@ func GetAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	}
 	tmpl.Execute(w, pod)
 	ip := r.RemoteAddr
-	logrus.Infoln("GET /get/" + ns + "/" + name + " from " + ip)
+	logrus.Infoln("GET /get/" + ns + "/pod/" + name + " from " + ip)
 
 }

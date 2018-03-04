@@ -22,7 +22,7 @@
       <tbody>
         {{range .Deployment}}
         <tr>
-          <td><i class="fa fa-circle {{.Status}}"></i></td>
+          <td><a href="/get/{{.Namespace}}/deployment/{{.Name}}">{{.Name}}</a></td>
           <td>{{.Name}}</td>
           <td>{{.Namespace}}</td>
           <td>{{.PodWanted}}</td>

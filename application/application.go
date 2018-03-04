@@ -59,7 +59,7 @@ func (app *Application) mux() *gorilla_mux.Router {
 		vars := gorilla_mux.Vars(r)
 		ns := vars["namespace"]
 		name := vars["name"]
-		handlers.GetAnyPod(w, r, ns, name)
+		handlers.GetAnyDeployment(w, r, ns, name)
 	}).Methods("GET")
 
 	// Path of static files must be last!

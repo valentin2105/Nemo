@@ -30,10 +30,9 @@ func ListDeployments() DeploymentList {
 	if err != nil {
 		log.Fatal(err)
 	}
-	version := GetEnv("KUBERNETES_VERSION", "v1.9")
+	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
 	if version == "v1.8" || version == "v1.7" || version == "v1.6" {
 		var deployments appsv1beta1.DeploymentList
-
 		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
 			log.Fatal(err)
 		}
@@ -84,4 +83,60 @@ func ListDeployments() DeploymentList {
 		}
 		return dl
 	}
+}
+
+// GetDeployment - describe a deployment
+func GetDeployment(ns string, name string) Deployment {
+	client, err := LoadClient(Kubeconfig)
+	if err != nil {
+		log.Fatal(err)
+	}
+	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
+	if version == "v1.8" || version == "v1.7" || version == "v1.6" {
+		var deployment appsv1beta1.Deployment
+		if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
+			log.Fatal(err)
+		}
+		//Name
+		n := fmt.Sprintf("%q", *deployment.Metadata.Name)
+		nc := TrimQuotes(n)
+		// Namespace
+		ns := fmt.Sprintf("%q", *deployment.Metadata.Namespace)
+		nsc := TrimQuotes(ns)
+		// PodWanted
+		pw := *deployment.Status.Replicas
+		// PodRunning
+		pr := *deployment.Status.AvailableReplicas
+		st := "Ready"
+		if pw != pr {
+			st = "NotReady"
+		}
+		// Put in slice
+		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
+		return d
+	} else {
+		var deployment appsv1.Deployment
+		if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
+			log.Fatal(err)
+		}
+		//Name
+		n := fmt.Sprintf("%q", *deployment.Metadata.Name)
+		nc := TrimQuotes(n)
+		// Namespace
+		ns := fmt.Sprintf("%q", *deployment.Metadata.Namespace)
+		nsc := TrimQuotes(ns)
+		// PodWanted
+		pw := *deployment.Status.Replicas
+		// PodRunning
+		pr := *deployment.Status.AvailableReplicas
+		st := "Ready"
+		if pw != pr {
+			st = "NotReady"
+		}
+		// Put in slice
+		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
+		return d
+
+	}
+
 }

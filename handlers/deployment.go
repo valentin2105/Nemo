@@ -26,3 +26,18 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 	ip := r.RemoteAddr
 	logrus.Infoln("GET /deployments from " + ip)
 }
+
+// GetAnyDeployment - Generate the Deployment describe view
+func GetAnyDeployment(w http.ResponseWriter, r *http.Request, ns string, name string) {
+	w.Header().Set("Content-Type", "text/html")
+	deployment := global.GetDeployment(ns, name)
+	tmpl, err := template.ParseFiles("templates/_navbar.html.tmpl", "templates/get/deployment.html.tmpl")
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
+	tmpl.Execute(w, deployment)
+	ip := r.RemoteAddr
+	logrus.Infoln("GET /get/" + ns + "/deployment/" + name + " from " + ip)
+
+}
