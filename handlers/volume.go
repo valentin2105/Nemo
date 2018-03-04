@@ -19,7 +19,7 @@ func GetVolumes(w http.ResponseWriter, r *http.Request) {
 		PV  global.PVlist
 	}
 	ClusterDatas := ClusterVars{PVC: pvcs, PV: pvs}
-	tmpl, err := template.ParseFiles("templates/_navbar.html.tmpl", "templates/volumes.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/volumes.html.tmpl")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return
