@@ -38,7 +38,7 @@ helm install -n nemo --namespace nemo-ui .
 ## Screenshots :
 
 <br>
-<img src="https://i.imgur.com/tCIj1Us.png" width="646" height="440">
+<img src="https://i.imgur.com/Xc5y7Im.png" width="646" height="440">
 
 ## How-to build ?
 `Nemo` use `GoDeps` to fetch Go depencies :
