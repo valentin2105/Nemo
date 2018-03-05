@@ -9,10 +9,9 @@
     </div>
 </center>
 </div>
-
 <div class="container">
   <div class="row">
-    <table class="table table-striped table-hover table-sm">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Status</th>
@@ -45,8 +44,8 @@
         <tbody>
         {{range .Node}}
         <tr>
-          <td><i class="fa fa-circle {{.Status}}"></i></td>
-          <td>{{.Name}}</td>
+          <td><i class="fa fa-circle {{.Status}}"></i> {{.Status}}</td>
+          <td><a href="/get/node/{{.Name}}">{{.Name}}</a></td>
           <td>{{.Schedulable}}</td>
         </tr>
         {{end}}

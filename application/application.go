@@ -65,6 +65,11 @@ func (app *Application) mux() *gorilla_mux.Router {
 		name := vars["name"]
 		handlers.GetAnyDeployment(w, r, ns, name)
 	}).Methods("GET")
+	router.HandleFunc("/get/node/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		name := vars["name"]
+		handlers.GetAnyNode(w, r, name)
+	}).Methods("GET")
 
 	// Path of static files must be last!
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))
