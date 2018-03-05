@@ -31,13 +31,11 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col">
       <a href="/pods"><button type="button" class="btn btn-light"><i class="fas fa-arrow-left"></i> Back to Pods list</button></a>
     </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-      <a href="/delete/{{.Namespace}}/pod/{{.Name}}"><button type="button" class="btn btn-danger" style="float: right;" ><i class="fas fa-trash"></i> Delete Pod</button></a>
+    <div class="col">
+      <a href="/delete/{{.Namespace}}/pod/{{.Name}}"><button type="button" class="btn btn-danger" style="float: right;"><i class="fas fa-trash"></i> Delete Pod</button></a>
     </div>
   </div>
 </div>

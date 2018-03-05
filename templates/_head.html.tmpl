@@ -38,13 +38,22 @@
               <a class="nav-link" href="/deployments"><i class="fas fa-boxes"></i> Deployments</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/volumes"><i class="fas fa-hdd"></i> Volumes</a>
+              <a class="nav-link" href="/services"><i class="fas fa-plug"></i> Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/configmaps"><i class="fas fa-cogs"></i> ConfigMaps</a>
+                <a class="nav-link" href="/volumes"><i class="fas fa-hdd"></i> Volumes</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/secrets"><i class="fas fa-unlock-alt"></i> Secrets</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-plus-circle"></i>
+                More
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/configmaps"><i class="fas fa-cogs"></i> ConfigMaps</a>
+                <a class="dropdown-item" href="/secrets"><i class="fas fa-unlock-alt"></i> Secrets</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/nodes"><i class="fas fa-server"></i> Nodes</a>
+              </div>
             </li>
           </ul>
 

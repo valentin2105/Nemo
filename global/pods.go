@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
@@ -35,17 +34,17 @@ func ListPods() PodList {
 	}
 	for _, pods := range pods.Items {
 		//Status
-		s := fmt.Sprintf("%q", *pods.Status.Phase)
+		s := *pods.Status.Phase
 		sc := TrimQuotes(s)
 		si := ChooseStatusFaIcon(sc)
 		//Name
-		n := fmt.Sprintf("%q", *pods.Metadata.Name)
+		n := *pods.Metadata.Name
 		nc := TrimQuotes(n)
 		// Namespace
-		ns := fmt.Sprintf("%q", *pods.Metadata.Namespace)
+		ns := *pods.Metadata.Namespace
 		nsc := TrimQuotes(ns)
 		//Worker
-		w := fmt.Sprintf("%q", *pods.Spec.NodeName)
+		w := *pods.Spec.NodeName
 		wc := TrimQuotes(w)
 		// Put in slice
 		p := Pod{Status: si, Name: nc, Namespace: nsc, Worker: wc}
@@ -66,16 +65,15 @@ func GetPod(ns string, name string) Pod {
 		log.Fatal(err)
 	}
 	//Status
-	s := fmt.Sprintf("%q", *pod.Status.Phase)
+	s := *pod.Status.Phase
 	sc := TrimQuotes(s)
 	//Name
-	n := fmt.Sprintf("%q", *pod.Metadata.Name)
+	n := *pod.Metadata.Name
 	nc := TrimQuotes(n)
 	// Namespace
-	nss := fmt.Sprintf("%q", *pod.Metadata.Namespace)
-	nsc := TrimQuotes(nss)
+	nsc := TrimQuotes(ns)
 	//Worker
-	w := fmt.Sprintf("%q", *pod.Spec.NodeName)
+	w := *pod.Spec.NodeName
 	wc := TrimQuotes(w)
 	//IP
 	ip := pod.Status.GetPodIP()
