@@ -1,13 +1,14 @@
 FROM golang:1.10.0-stretch
 ENV KUBE_LATEST_VERSION="v1.9.3"
 
-RUN go get github.com/tools/godep
-
 ADD . /go/src/github.com/valentin2105/Nemo
 
 WORKDIR /go/src/github.com/valentin2105/Nemo
-RUN 	godep get
-RUN 	godep go build
+
+RUN go get -u github.com/golang/dep/cmd/dep \
+    && dep ensure \
+    && go build
+
 
 FROM alpine:latest
 RUN apk update \
@@ -18,6 +19,7 @@ RUN apk update \
 WORKDIR /root/
 
 COPY --from=0 /go/src/github.com/valentin2105/Nemo/Nemo .
+COPY --from=0 /go/src/github.com/valentin2105/Nemo/templates/ .
 
 EXPOSE 8080
 COPY docker-entrypoint.sh .
