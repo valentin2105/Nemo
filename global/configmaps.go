@@ -16,7 +16,7 @@ type Configmap struct {
 	Created   string
 }
 
-// ConfigMapList - list of configmaps
+// ConfigmapList - list of configmaps
 type ConfigmapList []Configmap
 
 // ListConfigmaps - return a cm list

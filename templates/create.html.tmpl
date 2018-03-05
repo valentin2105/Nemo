@@ -1,0 +1,191 @@
+{{define "content"}}
+<br>
+<div class="container">
+  <center>
+    <div class="jumbotron">
+      <h2><i class="fas fa-cloud-upload-alt"></i> Create ressources</h2>
+    </div>
+  </center>
+  </div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-boxes"></i> Deployment
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+          <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Deployment name</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="my-super-deployment">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Docker image</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="myregistry/myapp:latest">
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              This is the main container image, you can add Sidecar if needed
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Replicas Number</label>
+            <input class="form-control" type="number" value="2" id="example-number-input">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Label</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="app-name: my-super-deployment">
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Readyness probe</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="curl localhost |grep <h1>My-App">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Liveness probe</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="curl localhost |grep <h1>My-App">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Volume</label>
+            <select id="inputState" class="form-control">
+              <option selected></option>
+              <option>PersistentVolumeClaim</option>
+              <option>EmptyDir</option>
+              <option>hostPath</option>
+            </select>
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              By default, no volume.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Volume MountPath</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="/var/www/my-app">
+          </div>
+
+          </form>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+  </div>
+</div>
+<br>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-plug"></i> Service
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+          <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Service name</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="my-super-deployment">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Service type</label>
+            <select id="inputState" class="form-control">
+              <option selected>ClusterIP</option>
+              <option>NodePort</option>
+              <option>LoadBalancer</option>
+              <option>ClusterIP: None</option>
+            </select>
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              ClusterIP is the default Service type, only internal.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Port</label>
+            <input class="form-control" type="number" value="8080" id="example-number-input">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Deployment label</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="app-name: my-super-deployment">
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              The label that match the deployment to expose.
+            </small>
+          </div>
+
+          </form>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-hdd"></i> VolumeClaim
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+          <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Claim name</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="my-app-volume">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Claim type</label>
+            <select id="inputState" class="form-control">
+              <option selected>ReadWriteMany</option>
+              <option>ReadWriteOnce</option>
+              <option>ReadOnly</option>
+            </select>
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              ReadwriteMany allow many pod to R/W on the volume.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Match label</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="app-name: my-super-deployment">
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              The label that match the deployment to expose.
+            </small>
+          </div>
+
+          </form>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <a href="/"><button type="button" class="btn btn-light"><i class="fas fa-arrow-left"></i> Back to home</button></a>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+{{end}}
