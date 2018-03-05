@@ -9,26 +9,28 @@
   </div>
 <div class="container">
   <div class="row">
-    <table class="table table-striped table-hover table-sortable">
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Name <i class="fa fa-angle-down"></i></th>
-          <th>Namespace <i class="fa fa-angle-down"></i></th>
-          <th>Worker <i class="fa fa-angle-down"></i></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{range .Pod}}
-        <tr>
-          <td><i class="fa {{.Status}}"></i></td>
-          <td><a href="/get/{{.Namespace}}/pod/{{.Name}}">{{.Name}}</a></td>
-          <td>{{.Namespace}}</td>
-          <td>{{.Worker}}</td>
-        </tr>
-        {{end}}
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-sortable">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Name <i class="fa fa-angle-down"></i></th>
+            <th>Namespace <i class="fa fa-angle-down"></i></th>
+            <th>Worker <i class="fa fa-angle-down"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .Pod}}
+          <tr>
+            <td><i class="fa {{.Status}}"></i></td>
+            <td><a href="/get/{{.Namespace}}/pod/{{.Name}}">{{.Name}}</a></td>
+            <td>{{.Namespace}}</td>
+            <td>{{.Worker}}</td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 {{end}}
