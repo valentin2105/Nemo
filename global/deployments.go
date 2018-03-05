@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"github.com/ericchiang/k8s"
@@ -38,10 +37,10 @@ func ListDeployments() DeploymentList {
 		}
 		for _, deployments := range deployments.Items {
 			//Name
-			n := fmt.Sprintf("%q", *deployments.Metadata.Name)
+			n := *deployments.Metadata.Name
 			nc := TrimQuotes(n)
 			// Namespace
-			ns := fmt.Sprintf("%q", *deployments.Metadata.Namespace)
+			ns := *deployments.Metadata.Namespace
 			nsc := TrimQuotes(ns)
 			// PodWanted
 			pw := *deployments.Status.Replicas
@@ -57,32 +56,31 @@ func ListDeployments() DeploymentList {
 		}
 		return dl
 
-	} else {
-		var deployments appsv1.DeploymentList
-		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
-			log.Fatal(err)
-		}
-		for _, deployments := range deployments.Items {
-			//Name
-			n := fmt.Sprintf("%q", *deployments.Metadata.Name)
-			nc := TrimQuotes(n)
-			// Namespace
-			ns := fmt.Sprintf("%q", *deployments.Metadata.Namespace)
-			nsc := TrimQuotes(ns)
-			// PodWanted
-			pw := *deployments.Status.Replicas
-			// PodRunning
-			pr := *deployments.Status.AvailableReplicas
-			st := "Ready"
-			if pw != pr {
-				st = "NotReady"
-			}
-			// Put in slice
-			d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
-			dl = append(dl, d)
-		}
-		return dl
 	}
+	var deployments appsv1.DeploymentList
+	if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
+		log.Fatal(err)
+	}
+	for _, deployments := range deployments.Items {
+		//Name
+		n := *deployments.Metadata.Name
+		nc := TrimQuotes(n)
+		// Namespace
+		ns := *deployments.Metadata.Namespace
+		nsc := TrimQuotes(ns)
+		// PodWanted
+		pw := *deployments.Status.Replicas
+		// PodRunning
+		pr := *deployments.Status.AvailableReplicas
+		st := "Ready"
+		if pw != pr {
+			st = "NotReady"
+		}
+		// Put in slice
+		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
+		dl = append(dl, d)
+	}
+	return dl
 }
 
 // GetDeployment - describe a deployment
@@ -98,10 +96,10 @@ func GetDeployment(ns string, name string) Deployment {
 			log.Fatal(err)
 		}
 		//Name
-		n := fmt.Sprintf("%q", *deployment.Metadata.Name)
+		n := *deployment.Metadata.Name
 		nc := TrimQuotes(n)
 		// Namespace
-		ns := fmt.Sprintf("%q", *deployment.Metadata.Namespace)
+		ns := *deployment.Metadata.Namespace
 		nsc := TrimQuotes(ns)
 		// PodWanted
 		pw := *deployment.Status.Replicas
@@ -114,29 +112,26 @@ func GetDeployment(ns string, name string) Deployment {
 		// Put in slice
 		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
 		return d
-	} else {
-		var deployment appsv1.Deployment
-		if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
-			log.Fatal(err)
-		}
-		//Name
-		n := fmt.Sprintf("%q", *deployment.Metadata.Name)
-		nc := TrimQuotes(n)
-		// Namespace
-		ns := fmt.Sprintf("%q", *deployment.Metadata.Namespace)
-		nsc := TrimQuotes(ns)
-		// PodWanted
-		pw := *deployment.Status.Replicas
-		// PodRunning
-		pr := *deployment.Status.AvailableReplicas
-		st := "Ready"
-		if pw != pr {
-			st = "NotReady"
-		}
-		// Put in slice
-		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
-		return d
-
 	}
-
+	var deployment appsv1.Deployment
+	if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
+		log.Fatal(err)
+	}
+	//Name
+	n := *deployment.Metadata.Name
+	nc := TrimQuotes(n)
+	// Namespace
+	ns = *deployment.Metadata.Namespace
+	nsc := TrimQuotes(ns)
+	// PodWanted
+	pw := *deployment.Status.Replicas
+	// PodRunning
+	pr := *deployment.Status.AvailableReplicas
+	st := "Ready"
+	if pw != pr {
+		st = "NotReady"
+	}
+	// Put in slice
+	d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
+	return d
 }

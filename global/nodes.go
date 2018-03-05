@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
@@ -39,7 +38,7 @@ func ListNodes() NodeList {
 			}
 		}
 		//Name
-		n := fmt.Sprintf("%q", *node.Metadata.Name)
+		n := *node.Metadata.Name
 		nc := TrimQuotes(n)
 
 		//Spec

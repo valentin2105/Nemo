@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"strconv"
 
@@ -46,16 +45,16 @@ func ListPVC() PVClist {
 	}
 	for _, PVCs := range PVCs.Items {
 		//Name
-		n := fmt.Sprintf("%q", *PVCs.Metadata.Name)
+		n := *PVCs.Metadata.Name
 		nc := TrimQuotes(n)
 		// Namespace
-		ns := fmt.Sprintf("%q", *PVCs.Metadata.Namespace)
+		ns := *PVCs.Metadata.Namespace
 		nsc := TrimQuotes(ns)
 		// Status
 		si := PVCs.Spec.Size()
 		sic := strconv.Itoa(si)
 		// Status
-		s := fmt.Sprintf("%q", PVCs.Status.GetPhase())
+		s := PVCs.Status.GetPhase()
 		sc := TrimQuotes(s)
 		// Put in slice
 		p := PVC{Name: nc, Namespace: nsc, Status: sc, Size: sic}
@@ -78,13 +77,13 @@ func ListPV() PVlist {
 	}
 	for _, PVs := range PVs.Items {
 		//Name
-		n := fmt.Sprintf("%q", *PVs.Metadata.Name)
+		n := *PVs.Metadata.Name
 		nc := TrimQuotes(n)
 		// Status
 		si := PVs.Status.Size()
 		sic := strconv.Itoa(si)
 		// Status
-		s := fmt.Sprintf("%q", PVs.Status.GetPhase())
+		s := PVs.Status.GetPhase()
 		sc := TrimQuotes(s)
 		// Put in slice
 		p := PV{Name: nc, Status: sc, Size: sic}

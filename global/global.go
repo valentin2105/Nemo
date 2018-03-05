@@ -3,7 +3,7 @@ package global
 import "os"
 
 // DefaultDateFormat - Date default format
-const DefaultDateFormat = "Mon Jan _2 2006 - 15:04"
+const DefaultDateFormat = "2006/01/02 - 15:04"
 
 // GetEnv - return env w/ fallback string
 func GetEnv(key, fallback string) string {

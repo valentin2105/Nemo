@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -33,10 +32,10 @@ func ListSecrets() SecretList {
 	}
 	for _, secrets := range secrets.Items {
 		//Name
-		n := fmt.Sprintf("%q", *secrets.Metadata.Name)
+		n := *secrets.Metadata.Name
 		nc := TrimQuotes(n)
 		// Namespace
-		ns := fmt.Sprintf("%q", *secrets.Metadata.Namespace)
+		ns := *secrets.Metadata.Namespace
 		nsc := TrimQuotes(ns)
 		//Created
 		c := secrets.Metadata.GetCreationTimestamp()

@@ -4,7 +4,6 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
 <img src="https://i.imgur.com/AuRlZuJ.png">
-
 `Nemo` (not the fish, the Captain) is a **Kubernetes UI** to list, describe et modify your cluster.
 
 ## Features :
@@ -44,11 +43,8 @@ helm install -n nemo --namespace nemo-ui .
 `Nemo` use `GoDeps` to fetch Go depencies :
 
 ```
-go get github.com/tools/godep
-mkdir -p $GOPATH/src/github.com/valentin2105/
-cd  $GOPATH/src/github.com/valentin2105/
-git clone https://github.com/valentin2105/Nemo.git && cd Nemo/
-godep get
-godep go build
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+dep ensure
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o Nemo d
 ./Nemo --kubeconfig /home/user/.kube/config
 ```

@@ -65,7 +65,7 @@ func ListComponentStatus() ComponentStatusList {
 			}
 		}
 		//Name
-		n := fmt.Sprintf("%q", *component.Metadata.Name)
+		n := *component.Metadata.Name
 		nc := TrimQuotes(n)
 		// Put in slice
 		no := ComponentStatus{Status: st, Name: nc}

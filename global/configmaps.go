@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -33,10 +32,10 @@ func ListConfigmaps() ConfigmapList {
 	}
 	for _, configmaps := range configmaps.Items {
 		//Name
-		n := fmt.Sprintf("%q", *configmaps.Metadata.Name)
+		n := *configmaps.Metadata.Name
 		nc := TrimQuotes(n)
 		// Namespace
-		ns := fmt.Sprintf("%q", *configmaps.Metadata.Namespace)
+		ns := *configmaps.Metadata.Namespace
 		nsc := TrimQuotes(ns)
 		//Created
 		c := configmaps.Metadata.GetCreationTimestamp()

@@ -13,7 +13,7 @@ type Pod struct {
 	Name      string
 	Namespace string
 	Worker    string
-	Ip        string
+	IP        string
 	Image     string
 }
 
@@ -81,6 +81,6 @@ func GetPod(ns string, name string) Pod {
 	ci := pod.Spec.Containers[0]
 	image := ci.GetImage()
 	// Put in slice
-	p = Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc, Ip: ip, Image: image}
+	p = Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc, IP: ip, Image: image}
 	return p
 }
