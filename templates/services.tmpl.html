@@ -16,6 +16,7 @@
             <th>Name <i class="fa fa-angle-down"></i></th>
             <th>Namespace <i class="fa fa-angle-down"></i></th>
             <th>IP <i class="fa fa-angle-down"></i></th>
+            <th>Port <i class="fa fa-angle-down"></i></th>
             <th>Type <i class="fa fa-angle-down"></i></th>
           </tr>
         </thead>
@@ -25,6 +26,7 @@
             <td><a href="/get/{{.Namespace}}/service/{{.Name}}">{{.Name}}</a></td>
             <td>{{.Namespace}}</td>
             <td>{{.IP}}</td>
+            <td>{{.Port}}</td>
             <td>{{.Type}}</td>
           </tr>
           {{end}}

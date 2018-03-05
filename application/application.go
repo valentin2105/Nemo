@@ -49,6 +49,7 @@ func (app *Application) mux() *gorilla_mux.Router {
 	// List
 	router.Handle("/pods", http.HandlerFunc(handlers.GetPods)).Methods("GET")
 	router.Handle("/deployments", http.HandlerFunc(handlers.GetDeployments)).Methods("GET")
+	router.Handle("/services", http.HandlerFunc(handlers.GetServices)).Methods("GET")
 	router.Handle("/volumes", http.HandlerFunc(handlers.GetVolumes)).Methods("GET")
 	router.Handle("/configmaps", http.HandlerFunc(handlers.GetConfigmaps)).Methods("GET")
 	router.Handle("/secrets", http.HandlerFunc(handlers.GetSecrets)).Methods("GET")
@@ -64,6 +65,12 @@ func (app *Application) mux() *gorilla_mux.Router {
 		ns := vars["namespace"]
 		name := vars["name"]
 		handlers.GetAnyDeployment(w, r, ns, name)
+	}).Methods("GET")
+	router.HandleFunc("/get/{namespace}/service/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		ns := vars["namespace"]
+		name := vars["name"]
+		handlers.GetAnyService(w, r, ns, name)
 	}).Methods("GET")
 	router.HandleFunc("/get/node/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
