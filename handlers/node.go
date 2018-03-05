@@ -13,7 +13,7 @@ import (
 func GetAnyNode(w http.ResponseWriter, r *http.Request, name string) {
 	w.Header().Set("Content-Type", "text/html")
 	node := global.GetNode(name)
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/get/node.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/node.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

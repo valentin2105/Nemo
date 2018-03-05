@@ -11,7 +11,7 @@ import (
 // Create - Generate the Creation view
 func Create(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/create.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/create.html.tmpl")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

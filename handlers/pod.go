@@ -17,7 +17,7 @@ func GetPods(w http.ResponseWriter, r *http.Request) {
 		Pod global.PodList
 	}
 	ClusterDatas := ClusterVars{Pod: pods}
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/pods.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/pods.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return
@@ -31,7 +31,7 @@ func GetPods(w http.ResponseWriter, r *http.Request) {
 func GetAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	w.Header().Set("Content-Type", "text/html")
 	pod := global.GetPod(ns, name)
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/get/pod.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/pod.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

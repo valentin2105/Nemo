@@ -17,7 +17,7 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 		Deployment global.DeploymentList
 	}
 	ClusterDatas := ClusterVars{Deployment: deployment}
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/deployments.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/deployments.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return
@@ -31,7 +31,7 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 func GetAnyDeployment(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	w.Header().Set("Content-Type", "text/html")
 	deployment := global.GetDeployment(ns, name)
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/get/deployment.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/deployment.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

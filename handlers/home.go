@@ -19,7 +19,7 @@ func GetHome(w http.ResponseWriter, r *http.Request) {
 		ComponentStatus global.ComponentStatusList
 	}
 	ClusterDatas := ClusterVars{ComponentStatus: components, Node: nodes}
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/home.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/home.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return
