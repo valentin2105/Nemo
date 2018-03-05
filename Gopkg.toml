@@ -43,4 +43,4 @@
 
 [prune]
   go-tests = true
-  unused-packages = true
+ unused-packages = true
