@@ -8,8 +8,3 @@ $(document).ready(function() {
 
 
 })
-
-
-function clickToto(e) {
-	e.target.innerHTML = "Toto";
-}
