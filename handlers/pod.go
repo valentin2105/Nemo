@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 	"net/http"
@@ -13,7 +14,11 @@ import (
 // GetPods - Generate the Pods list view
 func GetPods(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	pods := global.ListPods()
+	pods, err := global.ListPods()
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
 	type ClusterVars struct {
 		Pod global.PodList
 	}
@@ -21,6 +26,8 @@ func GetPods(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/pods.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
+		errorstr := fmt.Sprintf("%s", err)
+		logrus.Warn("Error to list Pods " + errorstr)
 		return
 	}
 	tmpl.Execute(w, ClusterDatas)
@@ -31,7 +38,11 @@ func GetPods(w http.ResponseWriter, r *http.Request) {
 // GetAnyPod - Generate the Pod describe view
 func GetAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	w.Header().Set("Content-Type", "text/html")
-	pod := global.GetPod(ns, name)
+	pod, err := global.GetPod(ns, name)
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/pod.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
@@ -40,13 +51,16 @@ func GetAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	tmpl.Execute(w, pod)
 	ip := r.RemoteAddr
 	logrus.Infoln("GET /get/" + ns + "/pod/" + name + " from " + ip)
-
 }
 
 // DeleteAnyPod - Generate the Pod describe view
 func DeleteAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	w.Header().Set("Content-Type", "text/html")
-	global.DeletePod(ns, name)
+	err := global.DeletePod(ns, name)
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
 	ip := r.RemoteAddr
 	io.WriteString(w, "Done")
 	logrus.Infoln("DELETE /delete/" + ns + "/pod/" + name + " from " + ip)

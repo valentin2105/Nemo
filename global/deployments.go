@@ -2,8 +2,10 @@ package global
 
 import (
 	"context"
+	"fmt"
 	"log"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/ericchiang/k8s"
 	appsv1 "github.com/ericchiang/k8s/apis/apps/v1"
 	appsv1beta1 "github.com/ericchiang/k8s/apis/apps/v1beta1"
@@ -27,7 +29,8 @@ func ListDeployments() DeploymentList {
 	dl := make(DeploymentList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		errorstr := fmt.Sprintf("%s", err)
+		logrus.Warn("Error " + errorstr)
 	}
 	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
 	if version == "v1.8" || version == "v1.7" || version == "v1.6" {

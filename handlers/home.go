@@ -12,12 +12,12 @@ import (
 // GetHome - Generate the home view
 func GetHome(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	nodes := global.ListNodes()
-	components := global.ListComponentStatus()
 	type ClusterVars struct {
 		Node            global.NodeList
 		ComponentStatus global.ComponentStatusList
 	}
+	components := global.ListComponentStatus()
+	nodes := global.ListNodes()
 	ClusterDatas := ClusterVars{ComponentStatus: components, Node: nodes}
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/home.tmpl.html")
 	if err != nil {

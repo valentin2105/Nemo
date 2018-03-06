@@ -5,8 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/ericchiang/k8s"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 	"github.com/ghodss/yaml"
@@ -49,11 +49,13 @@ func ListComponentStatus() ComponentStatusList {
 	nl := make(ComponentStatusList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		errorstr := fmt.Sprintf("%s", err)
+		logrus.Warn("Error " + errorstr)
 	}
 	var components corev1.ComponentStatusList
 	if err := client.List(context.Background(), "", &components); err != nil {
-		log.Fatal(err)
+		errorstr := fmt.Sprintf("%s", err)
+		logrus.Warn("Error " + errorstr)
 	}
 	for _, component := range components.Items {
 		//Status

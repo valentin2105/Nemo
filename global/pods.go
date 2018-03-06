@@ -2,7 +2,6 @@ package global
 
 import (
 	"context"
-	"log"
 
 	"github.com/ericchiang/k8s"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
@@ -23,16 +22,16 @@ type Pod struct {
 type PodList []Pod
 
 // ListPods - return a list of pod
-func ListPods() PodList {
+func ListPods() (PodList, error) {
 	pl := make(PodList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		return pl, err
 	}
 
 	var pods corev1.PodList
 	if err := client.List(context.Background(), "", &pods); err != nil {
-		log.Fatal(err)
+		return pl, err
 	}
 	for _, pods := range pods.Items {
 		//Status
@@ -51,19 +50,19 @@ func ListPods() PodList {
 		p := Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc}
 		pl = append(pl, p)
 	}
-	return pl
+	return pl, err
 }
 
 // GetPod - describe a pod
-func GetPod(ns string, name string) Pod {
+func GetPod(ns string, name string) (Pod, error) {
 	var p Pod
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		return p, err
 	}
 	var pod corev1.Pod
 	if err := client.Get(context.Background(), ns, name, &pod); err != nil {
-		log.Fatal(err)
+		return p, err
 	}
 	//Status
 	s := *pod.Status.Phase
@@ -83,14 +82,14 @@ func GetPod(ns string, name string) Pod {
 	image := ci.GetImage()
 	// Put in slice
 	p = Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc, IP: ip, Image: image}
-	return p
+	return p, err
 }
 
 // DeletePod - describe a pod
-func DeletePod(ns string, name string) {
+func DeletePod(ns string, name string) error {
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	Pod := &corev1.Pod{
 		Metadata: &metav1.ObjectMeta{
@@ -98,7 +97,6 @@ func DeletePod(ns string, name string) {
 			Namespace: k8s.String(ns),
 		},
 	}
-	if err := client.Delete(context.Background(), Pod); err != nil {
-		log.Fatal(err)
-	}
+	err = client.Delete(context.Background(), Pod)
+	return err
 }
