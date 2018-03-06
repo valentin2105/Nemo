@@ -70,3 +70,11 @@ body {
   text-align: center;
   vertical-align: middle;
 }
+
+.ui-pnotify-container {
+  margin-top: 30px;
+}
+
+.ui-pnotify-icon {
+  margin-top: 5px;
+}
