@@ -31,6 +31,7 @@ func ListDeployments() DeploymentList {
 	}
 	var deployments appsv1.DeploymentList
 	if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
+		logrus.Warn("Error " + err.Error())
 
 		var deployments appsv1beta1.DeploymentList
 		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
