@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"html/template"
 	"io"
 	"net/http"
@@ -26,8 +25,6 @@ func GetPods(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/pods.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
-		errorstr := fmt.Sprintf("%s", err)
-		logrus.Warn("Error to list Pods " + errorstr)
 		return
 	}
 	tmpl.Execute(w, ClusterDatas)

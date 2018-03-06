@@ -12,7 +12,11 @@ import (
 // GetServices - Generate the Services list view
 func GetServices(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	services := global.ListServices()
+	services, err := global.ListServices()
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
 	type ClusterVars struct {
 		Service global.ServiceList
 	}
@@ -30,7 +34,11 @@ func GetServices(w http.ResponseWriter, r *http.Request) {
 // GetAnyService - Generate the Service describe view
 func GetAnyService(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	w.Header().Set("Content-Type", "text/html")
-	service := global.GetService(ns, name)
+	service, err := global.GetService(ns, name)
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/service.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)

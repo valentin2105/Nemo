@@ -20,7 +20,6 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/deployments.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
-		logrus.Warn("Error " + err.Error())
 		return
 	}
 	tmpl.Execute(w, ClusterDatas)
@@ -35,7 +34,6 @@ func GetAnyDeployment(w http.ResponseWriter, r *http.Request, ns string, name st
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/deployment.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
-		logrus.Warn("Error " + err.Error())
 		return
 	}
 	tmpl.Execute(w, deployment)

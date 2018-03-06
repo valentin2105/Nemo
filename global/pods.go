@@ -33,8 +33,8 @@ func ListPods() (PodList, error) {
 
 	var pods corev1.PodList
 	if err := client.List(context.Background(), "", &pods); err != nil {
-		return pl, err
 		logrus.Warn("Error " + err.Error())
+		return pl, err
 	}
 	for _, pods := range pods.Items {
 		//Status

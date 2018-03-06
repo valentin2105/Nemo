@@ -22,7 +22,6 @@ func GetHome(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/home.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
-		logrus.Warn("Error " + err.Error())
 		return
 	}
 	tmpl.Execute(w, ClusterDatas)

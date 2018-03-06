@@ -22,16 +22,18 @@ type Service struct {
 type ServiceList []Service
 
 // ListServices - return a list of service
-func ListServices() ServiceList {
+func ListServices() (ServiceList, error) {
 	sl := make(ServiceList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
 		logrus.Warn("Error " + err.Error())
+		return sl, err
 	}
 
 	var services corev1.ServiceList
 	if err := client.List(context.Background(), "", &services); err != nil {
 		logrus.Warn("Error " + err.Error())
+		return sl, err
 	}
 	for _, services := range services.Items {
 		//Name
@@ -53,19 +55,21 @@ func ListServices() ServiceList {
 		s := Service{Name: nc, Namespace: nsc, IP: ic, Port: poc, Type: tc}
 		sl = append(sl, s)
 	}
-	return sl
+	return sl, err
 }
 
 // GetService - describe a service
-func GetService(ns string, name string) Service {
-	var p Service
+func GetService(ns string, name string) (Service, error) {
+	var s Service
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
 		logrus.Warn("Error " + err.Error())
+		return s, err
 	}
 	var service corev1.Service
 	if err := client.Get(context.Background(), ns, name, &service); err != nil {
 		logrus.Warn("Error " + err.Error())
+		return s, err
 	}
 	//Name
 	n := *service.Metadata.Name
@@ -83,6 +87,6 @@ func GetService(ns string, name string) Service {
 	t := service.Spec.GetType()
 	tc := TrimQuotes(t)
 	// Put in slice
-	p = Service{Name: nc, Namespace: nsc, IP: ic, Port: poc, Type: tc}
-	return p
+	s = Service{Name: nc, Namespace: nsc, IP: ic, Port: poc, Type: tc}
+	return s, err
 }
