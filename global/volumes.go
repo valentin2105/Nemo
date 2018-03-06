@@ -2,9 +2,9 @@ package global
 
 import (
 	"context"
-	"log"
 	"strconv"
 
+	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
@@ -36,12 +36,12 @@ func ListPVC() PVClist {
 	pvcl := make(PVClist, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 
 	var PVCs corev1.PersistentVolumeClaimList
 	if err := client.List(context.Background(), "", &PVCs); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, PVCs := range PVCs.Items {
 		//Name
@@ -68,12 +68,12 @@ func ListPV() PVlist {
 	pvl := make(PVlist, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 
 	var PVs corev1.PersistentVolumeClaimList
 	if err := client.List(context.Background(), "", &PVs); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, PVs := range PVs.Items {
 		//Name

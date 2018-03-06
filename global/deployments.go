@@ -2,8 +2,6 @@ package global
 
 import (
 	"context"
-	"fmt"
-	"log"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/ericchiang/k8s"
@@ -29,16 +27,14 @@ func ListDeployments() DeploymentList {
 	dl := make(DeploymentList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		errorstr := fmt.Sprintf("%s", err)
-		logrus.Warn("Error " + errorstr)
+		logrus.Warn("Error " + err.Error())
 	}
-	var deployments appsv1beta1.DeploymentList
+	var deployments appsv1.DeploymentList
 	if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
 
-		var deployments appsv1.DeploymentList
+		var deployments appsv1beta1.DeploymentList
 		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
-			errorstr := fmt.Sprintf("%s", err)
-			logrus.Warn("Error " + errorstr)
+			logrus.Warn("Error " + err.Error())
 		}
 
 	}
@@ -68,35 +64,16 @@ func ListDeployments() DeploymentList {
 func GetDeployment(ns string, name string) Deployment {
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
-	}
-	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
-	if version == "v1.8" || version == "v1.7" || version == "v1.6" {
-		var deployment appsv1beta1.Deployment
-		if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
-			log.Fatal(err)
-		}
-		//Name
-		n := *deployment.Metadata.Name
-		nc := TrimQuotes(n)
-		// Namespace
-		ns := *deployment.Metadata.Namespace
-		nsc := TrimQuotes(ns)
-		// PodWanted
-		pw := *deployment.Status.Replicas
-		// PodRunning
-		pr := *deployment.Status.AvailableReplicas
-		st := "Ready"
-		if pw != pr {
-			st = "NotReady"
-		}
-		// Put in slice
-		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
-		return d
+		logrus.Warn("Error " + err.Error())
 	}
 	var deployment appsv1.Deployment
 	if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
-		log.Fatal(err)
+
+		var deployment appsv1beta1.Deployment
+		if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
+			logrus.Warn("Error " + err.Error())
+		}
+
 	}
 	//Name
 	n := *deployment.Metadata.Name

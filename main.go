@@ -57,13 +57,11 @@ func main() {
 		Server:  &http.Server{Addr: serverAddress, Handler: middle},
 	}
 
-	version := global.GetEnv("KUBERNETES_VERSION", "v1.9")
-
 	if certFile != "" && keyFile != "" {
-		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTPS) for Kubernetes " + version)
+		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTPS)")
 		err = srv.ListenAndServeTLS(certFile, keyFile)
 	} else {
-		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTP) for Kubernetes " + version)
+		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTP)")
 		err = srv.ListenAndServe()
 	}
 

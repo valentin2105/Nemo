@@ -2,8 +2,8 @@ package global
 
 import (
 	"context"
-	"log"
 
+	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
@@ -22,11 +22,11 @@ func ListNodes() NodeList {
 	nl := make(NodeList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	var nodes corev1.NodeList
 	if err := client.List(context.Background(), "", &nodes); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, node := range nodes.Items {
 		//Status
@@ -57,11 +57,11 @@ func GetNode(name string) Node {
 	var no Node
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	var node corev1.Node
 	if err := client.Get(context.Background(), "", name, &node); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 
 	//Status

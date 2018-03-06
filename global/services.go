@@ -3,8 +3,8 @@ package global
 import (
 	"context"
 	"fmt"
-	"log"
 
+	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
@@ -26,12 +26,12 @@ func ListServices() ServiceList {
 	sl := make(ServiceList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 
 	var services corev1.ServiceList
 	if err := client.List(context.Background(), "", &services); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, services := range services.Items {
 		//Name
@@ -61,11 +61,11 @@ func GetService(ns string, name string) Service {
 	var p Service
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	var service corev1.Service
 	if err := client.Get(context.Background(), ns, name, &service); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	//Name
 	n := *service.Metadata.Name
