@@ -4,7 +4,9 @@ import (
 	"context"
 	"log"
 
+	"github.com/ericchiang/k8s"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
+	metav1 "github.com/ericchiang/k8s/apis/meta/v1"
 )
 
 // Pod - kubectl get pod
@@ -36,7 +38,6 @@ func ListPods() PodList {
 		//Status
 		s := *pods.Status.Phase
 		sc := TrimQuotes(s)
-		si := ChooseStatusFaIcon(sc)
 		//Name
 		n := *pods.Metadata.Name
 		nc := TrimQuotes(n)
@@ -47,7 +48,7 @@ func ListPods() PodList {
 		w := *pods.Spec.NodeName
 		wc := TrimQuotes(w)
 		// Put in slice
-		p := Pod{Status: si, Name: nc, Namespace: nsc, Worker: wc}
+		p := Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc}
 		pl = append(pl, p)
 	}
 	return pl
@@ -83,4 +84,21 @@ func GetPod(ns string, name string) Pod {
 	// Put in slice
 	p = Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc, IP: ip, Image: image}
 	return p
+}
+
+// DeletePod - describe a pod
+func DeletePod(ns string, name string) {
+	client, err := LoadClient(Kubeconfig)
+	if err != nil {
+		log.Fatal(err)
+	}
+	Pod := &corev1.Pod{
+		Metadata: &metav1.ObjectMeta{
+			Name:      k8s.String(name),
+			Namespace: k8s.String(ns),
+		},
+	}
+	if err := client.Delete(context.Background(), Pod); err != nil {
+		log.Fatal(err)
+	}
 }

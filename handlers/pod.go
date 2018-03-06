@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"html/template"
+	"io"
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
@@ -40,4 +41,13 @@ func GetAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
 	ip := r.RemoteAddr
 	logrus.Infoln("GET /get/" + ns + "/pod/" + name + " from " + ip)
 
+}
+
+// DeleteAnyPod - Generate the Pod describe view
+func DeleteAnyPod(w http.ResponseWriter, r *http.Request, ns string, name string) {
+	w.Header().Set("Content-Type", "text/html")
+	global.DeletePod(ns, name)
+	ip := r.RemoteAddr
+	io.WriteString(w, "Done")
+	logrus.Infoln("DELETE /delete/" + ns + "/pod/" + name + " from " + ip)
 }
