@@ -64,6 +64,7 @@ func main() {
 	if err != nil {
 		logrus.Fatal(err)
 	}
+
 	var components corev1.ComponentStatusList
 	if err := client.List(context.Background(), "", &components); err != nil {
 		logrus.Fatal("Error " + err.Error())
