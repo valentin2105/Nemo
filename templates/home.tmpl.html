@@ -21,7 +21,7 @@
       <tbody>
       {{range .ComponentStatus}}
       <tr>
-        <td><i class="fa fa-circle {{.Status}}"></i></td>
+        <td><i class="fa fa-circle {{.Status}}"></i> {{.Status}}</td>
         <td>{{.Name}}</td>
       </tr>
       {{end}}
