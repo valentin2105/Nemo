@@ -5,7 +5,7 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 BINARY_NAME=Nemo
-BINARY_UNIX=$(BINARY_NAME)_unix
+BINARY_UNIX=$(BINARY_NAME)
 KUBECONFIG=/Users/Valentin/.kube/config
 
 build:

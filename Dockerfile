@@ -6,7 +6,7 @@ WORKDIR /go/src/github.com/valentin2105/Nemo
 
 RUN go get -u github.com/golang/dep/cmd/dep \
     && dep ensure \
-    && go build
+    && make build-linux
 
 
 FROM alpine:latest
@@ -19,7 +19,7 @@ RUN  apk update \
 WORKDIR /root/
 
 COPY --from=0 /go/src/github.com/valentin2105/Nemo/Nemo .
-COPY --from=0 /go/src/github.com/valentin2105/Nemo/templates/ .
+COPY --from=0 /go/src/github.com/valentin2105/Nemo/templates/ templates/
 COPY docker-entrypoint.sh .
 
 EXPOSE 8080
