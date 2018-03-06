@@ -1,5 +1,5 @@
 function DeletePod(ns, name) {
-  $.ajax({
+  jQuery.ajax({
     type: 'DELETE',
     url: '/delete/' + ns + '/pod/' + name,
     success: function(data){

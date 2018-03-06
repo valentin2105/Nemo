@@ -26,13 +26,21 @@ cd Nemo/ && wget https://...
 chmod +x Nemo
 ./Nemo --kubeconfig /home/user/.kube/config
 ```
-Or, it can run in a Kubernetes cluster using `ServiceAccount` and `RBAC` deployed easily with `Helm`.
+It can run in a Kubernetes cluster using `ServiceAccount` and `RBAC` deployed easily with `Helm`.
 
 ```
 # Kubernetes
 git clone https://github.com/valentin2105/Nemo.git
 cd Nemo/helm
 helm install -n nemo --namespace nemo-ui .
+```
+Or via a simple `docker run` command :
+
+```
+ docker run -it -p 80:8080 -e KUBERNETES_SERVICE_HOST=k8s-api.domain.ltd \
+    -e KUBERNETES_SERVICE_PORT=6443 \
+		-e KUBERNETES_TOKEN=yourprivatetoken \
+		valentinnc/nemo
 ```
 
 ## Screenshots :
