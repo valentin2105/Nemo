@@ -25,7 +25,7 @@
             <td><i class="fa fa-circle {{.Status}}"></i> {{.Status}}</td>
             <td><a href="/get/{{.Namespace}}/pod/{{.Name}}">{{.Name}}</a></td>
             <td>{{.Namespace}}</td>
-            <td>{{.Worker}}</td>
+            <td><a href="/get/node/{{.Worker}}">{{.Worker}}</a></td>
           </tr>
           {{end}}
         </tbody>
