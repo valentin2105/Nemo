@@ -27,6 +27,9 @@ function deletePod(e) {
     url: '/delete/{{.Namespace}}/pod/{{.Name}}',
     success: function(data){
       SuccessDelete();
+      setTimeout(function() {
+        window.location.replace("/pods");
+      }, 700);
     },
     error: function(data){
           FailDelete();
