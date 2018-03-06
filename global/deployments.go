@@ -32,37 +32,15 @@ func ListDeployments() DeploymentList {
 		errorstr := fmt.Sprintf("%s", err)
 		logrus.Warn("Error " + errorstr)
 	}
-	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
-	if version == "v1.8" || version == "v1.7" || version == "v1.6" {
-		var deployments appsv1beta1.DeploymentList
-		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
-			log.Fatal(err)
-		}
-		for _, deployments := range deployments.Items {
-			//Name
-			n := *deployments.Metadata.Name
-			nc := TrimQuotes(n)
-			// Namespace
-			ns := *deployments.Metadata.Namespace
-			nsc := TrimQuotes(ns)
-			// PodWanted
-			pw := *deployments.Status.Replicas
-			// PodRunning
-			pr := *deployments.Status.AvailableReplicas
-			st := "Ready"
-			if pw != pr {
-				st = "NotReady"
-			}
-			// Put in slice
-			d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
-			dl = append(dl, d)
-		}
-		return dl
-
-	}
-	var deployments appsv1.DeploymentList
+	var deployments appsv1beta1.DeploymentList
 	if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
-		log.Fatal(err)
+
+		var deployments appsv1.DeploymentList
+		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
+			errorstr := fmt.Sprintf("%s", err)
+			logrus.Warn("Error " + errorstr)
+		}
+
 	}
 	for _, deployments := range deployments.Items {
 		//Name

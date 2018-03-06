@@ -20,10 +20,6 @@ run:
 				$(GOBUILD) -o $(BINARY_NAME) -v
 				./$(BINARY_NAME) -kubeconfig $(KUBECONFIG)
 
-run-old-k8s:
-				$(GOBUILD) -o $(BINARY_NAME) -v
-				KUBERNETES_VERSION=v1.8 ./$(BINARY_NAME) -kubeconfig $(KUBECONFIG)
-
 run-tls:
 				$(GOBUILD) -o $(BINARY_NAME) -v
 				sudo ./$(BINARY_NAME) -kubeconfig $(KUBECONFIG) -tlscert tls/fullchain.pem -tlskey tls/privkey.pem -addr :443
