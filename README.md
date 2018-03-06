@@ -39,8 +39,8 @@ Or via a simple `docker run` command :
 ```
  docker run -it -p 80:8080 -e KUBERNETES_SERVICE_HOST=k8s-api.domain.ltd \
     -e KUBERNETES_SERVICE_PORT=6443 \
-		-e KUBERNETES_TOKEN=yourprivatetoken \
-		valentinnc/nemo
+    -e KUBERNETES_TOKEN=yourprivatetoken \
+    valentinnc/nemo
 ```
 
 ## Screenshots :
