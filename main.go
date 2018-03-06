@@ -1,15 +1,18 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"net/http"
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 	"github.com/spf13/viper"
 	"github.com/tylerb/graceful"
 
 	"github.com/valentin2105/Nemo/application"
+	"github.com/valentin2105/Nemo/global"
 )
 
 var (
@@ -54,6 +57,16 @@ func main() {
 	srv := &graceful.Server{
 		Timeout: drainInterval,
 		Server:  &http.Server{Addr: serverAddress, Handler: middle},
+	}
+
+	//Checks before start
+	client, err := global.LoadClient(global.Kubeconfig)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+	var components corev1.ComponentStatusList
+	if err := client.List(context.Background(), "", &components); err != nil {
+		logrus.Fatal("Error " + err.Error())
 	}
 
 	if certFile != "" && keyFile != "" {

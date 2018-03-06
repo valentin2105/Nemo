@@ -1,42 +1,4 @@
 {{define "content"}}
-<script type="text/javascript">
-function SuccessDelete() {
-  new PNotify({
-  title: 'Pod deleted.',
-  text: '{{.Name}} is deleted.',
-  type: 'success',
-  nonblock: {
-      nonblock: true
-  }
-  });
-}
-function FailDelete(data) {
-  new PNotify({
-  title: 'Failed to delete.',
-  text: '{{.Name}} failed to delete',
-  icon: 'fas fa-exclamation',
-  type: 'error',
-  nonblock: {
-      nonblock: true
-  }
-  })
-}
-function deletePod(e) {
-  $.ajax({
-    type: 'DELETE',
-    url: '/delete/{{.Namespace}}/pod/{{.Name}}',
-    success: function(data){
-      SuccessDelete();
-      setTimeout(function() {
-        window.location.replace("/pods");
-      }, 1000);
-    },
-    error: function(data){
-          FailDelete();
-    }
-  });
-}
-</script>
 <br>
 <div class="container">
   <center>
@@ -73,7 +35,7 @@ function deletePod(e) {
       <a href="/pods"><button type="button" class="btn btn-light"><i class="fas fa-arrow-left"></i> Back to Pods list</button></a>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-danger" style="float: right;" onclick="deletePod(event)"><i class="fas fa-trash"></i> Delete Pod</button></a>
+      <button type="button" class="btn btn-danger" style="float: right;" onclick="DeletePod({{.Namespace}}, {{.Name}})"><i class="fas fa-trash"></i> Delete Pod</button></a>
     </div>
   </div>
 </div>

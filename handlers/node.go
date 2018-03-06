@@ -12,7 +12,11 @@ import (
 // GetAnyNode - Generate the Node describe view
 func GetAnyNode(w http.ResponseWriter, r *http.Request, name string) {
 	w.Header().Set("Content-Type", "text/html")
-	node := global.GetNode(name)
+	node, err := global.GetNode(name)
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/get/node.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)

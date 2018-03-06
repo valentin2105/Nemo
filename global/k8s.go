@@ -15,8 +15,6 @@ import (
 var (
 	//Kubeconfig - Kubernetes configuration file path
 	Kubeconfig = flag.String("kubeconfig", "/root/.kube/config", "KubeConfig Path")
-	//K8sVersion - Version of k8s (default)
-	K8sVersion = "v1.9"
 )
 
 // ComponentStatus - kubectl get cs
