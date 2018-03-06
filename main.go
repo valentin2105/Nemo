@@ -10,7 +10,6 @@ import (
 	"github.com/tylerb/graceful"
 
 	"github.com/valentin2105/Nemo/application"
-	"github.com/valentin2105/Nemo/global"
 )
 
 var (
