@@ -20,7 +20,7 @@ WORKDIR /root/
 
 COPY --from=0 /go/src/github.com/valentin2105/Nemo/Nemo .
 COPY --from=0 /go/src/github.com/valentin2105/Nemo/templates/ .
+COPY docker-entrypoint.sh .
 
 EXPOSE 8080
-COPY docker-entrypoint.sh .
 CMD ["./docker-entrypoint.sh"]
