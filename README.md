@@ -50,11 +50,11 @@ Or via a simple `docker run` command :
 <img src="https://i.imgur.com/Xc5y7Im.png" width="646" height="440">
 
 ## How to build it
-`Nemo` uses `GoDeps` to fetch Go dependencies:
+`Nemo` uses `dep` to fetch Go dependencies:
 
 ```
 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 dep ensure
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o Nemo d
+make build
 ./Nemo --kubeconfig /home/user/.kube/config
 ```
