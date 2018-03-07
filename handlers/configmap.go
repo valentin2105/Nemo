@@ -17,7 +17,7 @@ func GetConfigmaps(w http.ResponseWriter, r *http.Request) {
 		Configmap global.ConfigmapList
 	}
 	ClusterDatas := ClusterVars{Configmap: configmaps}
-	tmpl, err := template.ParseFiles("templates/_head.html.tmpl", "templates/configmaps.html.tmpl")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/configmaps.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

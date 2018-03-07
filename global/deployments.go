@@ -2,8 +2,8 @@ package global
 
 import (
 	"context"
-	"log"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/ericchiang/k8s"
 	appsv1 "github.com/ericchiang/k8s/apis/apps/v1"
 	appsv1beta1 "github.com/ericchiang/k8s/apis/apps/v1beta1"
@@ -27,14 +27,16 @@ func ListDeployments() DeploymentList {
 	dl := make(DeploymentList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
-	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
-	if version == "v1.8" || version == "v1.7" || version == "v1.6" {
+	var deployments appsv1.DeploymentList
+	if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
+
 		var deployments appsv1beta1.DeploymentList
 		if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
-			log.Fatal(err)
+			logrus.Warn("Error " + err.Error())
 		}
+
 		for _, deployments := range deployments.Items {
 			//Name
 			n := *deployments.Metadata.Name
@@ -57,10 +59,6 @@ func ListDeployments() DeploymentList {
 		return dl
 
 	}
-	var deployments appsv1.DeploymentList
-	if err := client.List(context.Background(), k8s.AllNamespaces, &deployments); err != nil {
-		log.Fatal(err)
-	}
 	for _, deployments := range deployments.Items {
 		//Name
 		n := *deployments.Metadata.Name
@@ -81,25 +79,27 @@ func ListDeployments() DeploymentList {
 		dl = append(dl, d)
 	}
 	return dl
+
 }
 
 // GetDeployment - describe a deployment
 func GetDeployment(ns string, name string) Deployment {
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
-	version := GetEnv("KUBERNETES_VERSION", K8sVersion)
-	if version == "v1.8" || version == "v1.7" || version == "v1.6" {
+	var deployment appsv1.Deployment
+	if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
+
 		var deployment appsv1beta1.Deployment
 		if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
-			log.Fatal(err)
+			logrus.Warn("Error " + err.Error())
 		}
 		//Name
 		n := *deployment.Metadata.Name
 		nc := TrimQuotes(n)
 		// Namespace
-		ns := *deployment.Metadata.Namespace
+		ns = *deployment.Metadata.Namespace
 		nsc := TrimQuotes(ns)
 		// PodWanted
 		pw := *deployment.Status.Replicas
@@ -112,10 +112,7 @@ func GetDeployment(ns string, name string) Deployment {
 		// Put in slice
 		d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
 		return d
-	}
-	var deployment appsv1.Deployment
-	if err := client.Get(context.Background(), ns, name, &deployment); err != nil {
-		log.Fatal(err)
+
 	}
 	//Name
 	n := *deployment.Metadata.Name
@@ -134,4 +131,5 @@ func GetDeployment(ns string, name string) Deployment {
 	// Put in slice
 	d := Deployment{Status: st, Name: nc, Namespace: nsc, PodWanted: pw, PodRunning: pr}
 	return d
+
 }

@@ -2,9 +2,9 @@ package global
 
 import (
 	"context"
-	"log"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
@@ -23,12 +23,12 @@ func ListConfigmaps() ConfigmapList {
 	pl := make(ConfigmapList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 
 	var configmaps corev1.ConfigMapList
 	if err := client.List(context.Background(), "", &configmaps); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, configmaps := range configmaps.Items {
 		//Name

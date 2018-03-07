@@ -8,34 +8,22 @@ img.displayed {
     margin-right: auto
 }
 
-i.failed {
-    color: red;
-}
-
-i.success {
+i.Healthy, i.Running, i.Ready, i.success {
     color: #00a300;
 }
 
-i.NotReady {
+i.Unhealthy, i.NotReady, i.failed, i.Error, i.CrashLoopBackOff,   {
     color: red;
 }
 
-i.Ready {
-    color: #00a300;
+i.Evicted, i.Failed, i.Pending, i.Succeeded {
+    color: black;
 }
-
-i.Healthy {
-    color: #00a300;
-}
-
-i.Unhealthy {
-    color: red;
-}
-
 
 i.info {
     color: white;
 }
+
 i.navbar-brand {
     margin-top: 2px;
 }
@@ -47,7 +35,6 @@ i.navbar-brand {
 a {
   color: #000000;
 }
-
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -69,4 +56,12 @@ body {
   background-color: #f5f5f5;
   text-align: center;
   vertical-align: middle;
+}
+
+.ui-pnotify-container {
+  margin-top: 30px;
+}
+
+.ui-pnotify-icon {
+  margin-top: 5px;
 }

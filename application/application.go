@@ -42,6 +42,9 @@ func (app *Application) MiddlewareStruct() (*interpose.Middleware, error) {
 func (app *Application) mux() *gorilla_mux.Router {
 	router := gorilla_mux.NewRouter()
 
+	// All other Routes -> 404
+	router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
+
 	// HTTP Routes
 	router.Handle("/", http.HandlerFunc(handlers.GetHome)).Methods("GET")
 	// Create
@@ -49,6 +52,7 @@ func (app *Application) mux() *gorilla_mux.Router {
 	// List
 	router.Handle("/pods", http.HandlerFunc(handlers.GetPods)).Methods("GET")
 	router.Handle("/deployments", http.HandlerFunc(handlers.GetDeployments)).Methods("GET")
+	router.Handle("/services", http.HandlerFunc(handlers.GetServices)).Methods("GET")
 	router.Handle("/volumes", http.HandlerFunc(handlers.GetVolumes)).Methods("GET")
 	router.Handle("/configmaps", http.HandlerFunc(handlers.GetConfigmaps)).Methods("GET")
 	router.Handle("/secrets", http.HandlerFunc(handlers.GetSecrets)).Methods("GET")
@@ -65,6 +69,24 @@ func (app *Application) mux() *gorilla_mux.Router {
 		name := vars["name"]
 		handlers.GetAnyDeployment(w, r, ns, name)
 	}).Methods("GET")
+	router.HandleFunc("/get/{namespace}/service/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		ns := vars["namespace"]
+		name := vars["name"]
+		handlers.GetAnyService(w, r, ns, name)
+	}).Methods("GET")
+	router.HandleFunc("/get/node/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		name := vars["name"]
+		handlers.GetAnyNode(w, r, name)
+	}).Methods("GET")
+	// Delete
+	router.HandleFunc("/delete/{namespace}/pod/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		name := vars["name"]
+		ns := vars["namespace"]
+		handlers.DeleteAnyPod(w, r, ns, name)
+	}).Methods("DELETE")
 
 	// Path of static files must be last!
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))

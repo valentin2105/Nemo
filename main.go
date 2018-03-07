@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"net/http"
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 	"github.com/spf13/viper"
 	"github.com/tylerb/graceful"
 
@@ -57,13 +59,22 @@ func main() {
 		Server:  &http.Server{Addr: serverAddress, Handler: middle},
 	}
 
-	version := global.GetEnv("KUBERNETES_VERSION", "v1.9")
+	//Checks before start
+	client, err := global.LoadClient(global.Kubeconfig)
+	if err != nil {
+		logrus.Fatal(err)
+	}
+
+	var components corev1.ComponentStatusList
+	if err := client.List(context.Background(), "", &components); err != nil {
+		logrus.Fatal("Error " + err.Error())
+	}
 
 	if certFile != "" && keyFile != "" {
-		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTPS) for Kubernetes " + version)
+		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTPS)")
 		err = srv.ListenAndServeTLS(certFile, keyFile)
 	} else {
-		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTP) for Kubernetes " + version)
+		logrus.Infoln("Nemo is Running on -> " + serverAddress + " (HTTP)")
 		err = srv.ListenAndServe()
 	}
 

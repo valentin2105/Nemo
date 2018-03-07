@@ -3,7 +3,7 @@ package global
 import "os"
 
 // DefaultDateFormat - Date default format
-const DefaultDateFormat = "2006/01/02 - 15:04"
+const DefaultDateFormat = "2006-01-02 15:04"
 
 // GetEnv - return env w/ fallback string
 func GetEnv(key, fallback string) string {
@@ -21,30 +21,4 @@ func TrimQuotes(s string) string {
 		}
 	}
 	return s
-}
-
-// ChooseStatusFaIcon - Choose a fa-icon in case of string arg
-func ChooseStatusFaIcon(s string) string {
-	if s == "Running" {
-		e := "fa-circle success"
-		return e
-	} else if s == "Succeeded" {
-		e := "fa-circle"
-		return e
-	} else if s == "Failed" {
-		e := "fa-circle"
-		return e
-	} else if s == "Pending" {
-		e := "fa-circle"
-		return e
-	} else if s == "Error" {
-		e := "fa-circle"
-		return e
-	} else if s == "CrashLoopBackOff" {
-		e := "fa-circle failed"
-		return e
-	} else {
-		e := "fa-circle"
-		return e
-	}
 }

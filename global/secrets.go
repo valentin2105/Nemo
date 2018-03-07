@@ -2,9 +2,9 @@ package global
 
 import (
 	"context"
-	"log"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 )
 
@@ -23,12 +23,12 @@ func ListSecrets() SecretList {
 	pl := make(SecretList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 
 	var secrets corev1.SecretList
 	if err := client.List(context.Background(), "", &secrets); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, secrets := range secrets.Items {
 		//Name

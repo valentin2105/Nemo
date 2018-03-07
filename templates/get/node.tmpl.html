@@ -3,7 +3,7 @@
 <div class="container">
   <center>
     <div class="jumbotron">
-      <h2><i class="fa fa-box"></i>  Pods</h2>
+      <h2><i class="fas fa-server"></i>  {{.Name}}</h2>
     </div>
   </center>
   </div>
@@ -14,19 +14,15 @@
         <tr>
           <th>Status</th>
           <th>Name <i class="fa fa-angle-down"></i></th>
-          <th>Namespace <i class="fa fa-angle-down"></i></th>
-          <th>Worker <i class="fa fa-angle-down"></i></th>
+          <th>Schedulable <i class="fa fa-angle-down"></i></th>
         </tr>
       </thead>
       <tbody>
-        {{range .Pod}}
         <tr>
-          <td><i class="fa {{.Status}}"></i></td>
-          <td><a href="/get/{{.Namespace}}/pod/{{.Name}}">{{.Name}}</a></td>
-          <td>{{.Namespace}}</td>
-          <td>{{.Worker}}</td>
+          <td><i class="fa fa-circle {{.Status}}"></i> {{.Status}}</td>
+          <td>{{.Name}}</td>
+          <td>{{.Schedulable}}</td>
         </tr>
-        {{end}}
       </tbody>
     </table>
   </div>

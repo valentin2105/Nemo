@@ -5,7 +5,7 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 BINARY_NAME=Nemo
-BINARY_UNIX=$(BINARY_NAME)_unix
+BINARY_UNIX=$(BINARY_NAME)
 KUBECONFIG=/Users/Valentin/.kube/config
 
 build:
@@ -20,10 +20,6 @@ run:
 				$(GOBUILD) -o $(BINARY_NAME) -v
 				./$(BINARY_NAME) -kubeconfig $(KUBECONFIG)
 
-run-old-k8s:
-				$(GOBUILD) -o $(BINARY_NAME) -v
-				KUBERNETES_VERSION=v1.8 ./$(BINARY_NAME) -kubeconfig $(KUBECONFIG)
-
 run-tls:
 				$(GOBUILD) -o $(BINARY_NAME) -v
 				sudo ./$(BINARY_NAME) -kubeconfig $(KUBECONFIG) -tlscert tls/fullchain.pem -tlskey tls/privkey.pem -addr :443
@@ -35,5 +31,6 @@ all: test build
 
 build-linux:
 				CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
+
 docker-build:
 				docker build -t valentinnc/nemo .

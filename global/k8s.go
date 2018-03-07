@@ -5,8 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/ericchiang/k8s"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 	"github.com/ghodss/yaml"
@@ -15,8 +15,6 @@ import (
 var (
 	//Kubeconfig - Kubernetes configuration file path
 	Kubeconfig = flag.String("kubeconfig", "/root/.kube/config", "KubeConfig Path")
-	//K8sVersion - Version of k8s (default)
-	K8sVersion = "v1.9"
 )
 
 // ComponentStatus - kubectl get cs
@@ -35,6 +33,7 @@ func LoadClient(kubeconfigPath *string) (*k8s.Client, error) {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("read kubeconfig: %v", err)
+		logrus.Warn("Error " + err.Error())
 	}
 	// Unmarshal YAML into a Kubernetes config object.
 	var config k8s.Config
@@ -49,11 +48,11 @@ func ListComponentStatus() ComponentStatusList {
 	nl := make(ComponentStatusList, 0)
 	client, err := LoadClient(Kubeconfig)
 	if err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	var components corev1.ComponentStatusList
 	if err := client.List(context.Background(), "", &components); err != nil {
-		log.Fatal(err)
+		logrus.Warn("Error " + err.Error())
 	}
 	for _, component := range components.Items {
 		//Status

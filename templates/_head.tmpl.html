@@ -2,19 +2,29 @@
 <html>
   <head>
     <title>Nemo</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha256-5+02zu5UULQkO7w1GIr6vftCgMfFdZcAHeDtFnKZsBs=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" integrity="sha256-d0mtrHsQZQe2+DIl6Z+F1rVWLI++ycF3BEXQUWf04xs=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.nonblock.css" integrity="sha256-o6ar29qJKgTZSqmuIUGCZdp27NsrGqdAZHtvxNffV8o=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js" integrity="sha256-Wdie7xDu6PuVG6BqNy/dEEYY0jK2JutDYnn0sI19yTw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.nonblock.js" integrity="sha256-XL9Jpf+ZGjO3i0L4cRvavUoRP8V2S4Jt4zCqPJUoeXU=" crossorigin="anonymous"></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" integrity="sha256-nHqyaYNesT9scVgPowgLU54nmjxsZ8E0ArPwlysH5A8=" crossorigin="anonymous" />
+
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.js" integrity="sha256-dYjBqivYdJIuOxa+BYl2XMeFwMFAvD1Ejeo1tMQjC4I=" crossorigin="anonymous"></script>
+    <script src="/project/js/table-sort.js"></script>
+    <script src="/project/js/application.js"></script>
+    <script src="/project/js/global.js"></script>
+    <script src="/project/js/k8s.js"></script>
 
     <link rel="stylesheet" href="/project/css/dashboard.css">
-    <script src="/project/js/table-sort.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <script src="/project/js/application.js"></script>  </head>
+  </head>
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -48,9 +58,8 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/configmaps"><i class="fas fa-cogs"></i> ConfigMaps</a>
-                <a class="dropdown-item" href="/secrets"><i class="fas fa-unlock-alt"></i> Secrets</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/nodes"><i class="fas fa-server"></i> Nodes</a>
+                <a class="dropdown-item" href="/secrets"><i class="fas fa-unlock-alt"></i> Secrets</a>
               </div>
             </li>
           </ul>

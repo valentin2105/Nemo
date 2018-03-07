@@ -4,6 +4,7 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
 <img src="https://i.imgur.com/AuRlZuJ.png">
+
 `Nemo` (not the fish, the Captain) is a **Kubernetes UI** to list, describe and modify resources in your cluster.
 
 ## Features
@@ -26,13 +27,21 @@ chmod +x Nemo
 ./Nemo --kubeconfig /home/user/.kube/config
 ```
 
-Or you can run it in your Kubernetes cluster using `ServiceAccount` and `RBAC` in combination with `Helm`.
+You can run it in your Kubernetes cluster using `ServiceAccount` and `RBAC` in combination with `Helm`.
 
 ```
 # Helm
 git clone https://github.com/valentin2105/Nemo.git
 cd Nemo/helm
 helm install -n nemo --namespace nemo-ui .
+```
+Or via a simple `docker run` command :
+
+```
+ docker run -it -p 80:8080 -e KUBERNETES_SERVICE_HOST=k8s-api.domain.ltd \
+    -e KUBERNETES_SERVICE_PORT=6443 \
+    -e KUBERNETES_TOKEN=yourprivatetoken \
+    valentinnc/nemo
 ```
 
 ## Screenshots
