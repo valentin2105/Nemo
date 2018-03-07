@@ -6,11 +6,28 @@
       <h2 class="display-4"><i class="fa fa-box"></i>  Pods</h2>
     </div>
   </center>
-  </div>
+</div>
+
+
+
+
+
+
 <div class="container">
   <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+    </div>
+    <div class="col">
+      <div class="md-form form-group">
+        <i class="fas fa-search prefix"></i>
+        <input type="text" id="inputIconEx1" class="form-control search">
+        <label for="inputIconEx1">Search <span class="counter pull-right"></span></label>
+      </div>
+    </div>
     <div class="table-responsive">
-      <table class="table table-striped table-hover table-sortable">
+      <table class="table table-striped table-hover table-sortable results">
         <thead>
           <tr>
             <th>Status <i class="fa fa-angle-down"></i></th>
@@ -28,6 +45,9 @@
             <td><a href="/get/node/{{.Worker}}">{{.Worker}}</a></td>
           </tr>
           {{end}}
+          <tr class="warning no-result">
+            <td colspan="4"><i class="fa fa-warning"></i>No results</td>
+          </tr>
         </tbody>
       </table>
     </div>

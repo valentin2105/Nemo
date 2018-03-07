@@ -2,7 +2,11 @@
     z-index: 1100;
 }
 
-img.displayed {
+.jumbotron {
+  margin-bottom: 1rem;
+}
+
+img.displayed {G
     display: block;
     margin-left: auto;
     margin-right: auto
@@ -65,9 +69,35 @@ body {
 }
 
 .ui-pnotify-container {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .ui-pnotify-icon {
   margin-top: 5px;
+}
+
+i.dropdown {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
+
+
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  color:#ccc;
+  margin-left: 5px;
+}
+
+.pull-right {
+  float: right;
 }
