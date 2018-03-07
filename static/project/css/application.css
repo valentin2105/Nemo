@@ -28,6 +28,12 @@ i.navbar-brand {
     margin-top: 2px;
 }
 
+.navbar-brand {
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
 .fa {
   margin-right: 6px;
 }

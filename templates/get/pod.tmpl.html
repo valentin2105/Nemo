@@ -3,7 +3,7 @@
 <div class="container">
   <center>
     <div class="jumbotron">
-      <h2><i class="fa fa-box"></i> {{ .Name }}</h2>
+      <h2 class="display-5"><i class="fa fa-box"></i> {{ .Name }}</h2>
       <br>
       <h5>{{ .Namespace }}</h5>
     </div>
@@ -27,17 +27,21 @@
       <h5 class="card-title"><span class="badge badge-pill badge-light">{{ .Image }}</span></h5>
       </div>
     </div>
-    <br>
 </div>
+    <br>
 <div class="container">
   <div class="row">
     <div class="col">
-      <a href="/pods"><button type="button" class="btn btn-light"><i class="fas fa-arrow-left"></i> Back to Pods</button></a>
+      <a href="/pods"><button type="button" class="btn btn-info"><i class="fas fa-arrow-left"></i> Back to Pods</button></a>
     </div>
     <div class="col">
       <button type="button" class="btn btn-danger" style="float: right;" onclick="DeletePod({{.Namespace}}, {{.Name}})"><i class="fas fa-trash"></i> Delete Pod</button></a>
     </div>
   </div>
 </div>
+
+
+
+
 
 {{end}}

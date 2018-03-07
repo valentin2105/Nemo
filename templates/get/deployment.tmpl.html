@@ -3,25 +3,52 @@
 <div class="container">
   <center>
     <div class="jumbotron">
-      <h2><i class="fa fa-boxes"></i> {{ .Name }}</h2>
+      <h2 class="display-5"><i class="fa fa-boxes"></i> {{ .Name }}</h2>
       <br>
       <h5>{{ .Namespace }}</h5>
     </div>
   </center>
-  </div>
+</div>
 
 <div class="container">
-    <div class="card">
-      <div class="card-header">
-        Deployment Description
+  <div class="card">
+    <div class="card-header">
+      Deployment Description
+    </div>
+  <div class="card-body">
+    <h5 class="card-title"><span class="badge badge-pill badge-primary">{{.PodWanted}}</span></h5>
+    <h5 class="card-title"><span class="badge badge-pill badge-dark">{{.PodRunning}}</span></h5>
+    <h4 class="card-title"><span class="badge badge-pill badge-danger">{{.Image}}</span></h4>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="/deployments"><button type="button" class="btn btn-info"><i class="fas fa-arrow-left"></i> Back to Deployments list</button></a>
       </div>
-    <div class="card-body">
-      <h5 class="card-title"><span class="badge badge-pill badge-primary">{{.PodWanted}}</span></h5>
-      <h5 class="card-title"><span class="badge badge-pill badge-dark">{{.PodRunning}}</span></h5>
-      <h4 class="card-title"><span class="badge badge-pill badge-danger">{{.Image}}</span></h4>
+      <div class="col">
+        <button type="button" class="btn btn-danger" style="float: right;" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash"></i> Delete deployment...</button></a>
       </div>
     </div>
-    <a href="/deployments"><button type="button" class="btn btn-light"><i class="fas fa-arrow-left"></i> Back to Deployments list</button></a>
 </div>
-<!-- Slider with Starting Value -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-danger"></i> Are you sure to delete {{ .Name }} ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger">Yes, Delete the deployment</button>
+      </div>
+    </div>
+  </div>
+</div>
 {{end}}

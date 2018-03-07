@@ -16,14 +16,13 @@
     <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" integrity="sha256-nHqyaYNesT9scVgPowgLU54nmjxsZ8E0ArPwlysH5A8=" crossorigin="anonymous" />
 
-
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.js" integrity="sha256-dYjBqivYdJIuOxa+BYl2XMeFwMFAvD1Ejeo1tMQjC4I=" crossorigin="anonymous"></script>
     <script src="/project/js/table-sort.js"></script>
     <script src="/project/js/application.js"></script>
     <script src="/project/js/global.js"></script>
     <script src="/project/js/k8s.js"></script>
 
-    <link rel="stylesheet" href="/project/css/dashboard.css">
+    <link rel="stylesheet" href="/project/css/application.css">
   </head>
 
   <body>
@@ -58,16 +57,20 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/configmaps"><i class="fas fa-cogs"></i> ConfigMaps</a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/secrets"><i class="fas fa-unlock-alt"></i> Secrets</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/create"><i class="fa fa-cloud-upload-alt"></i>Create<span class="sr-only">(current)</span></a>
               </div>
             </li>
           </ul>
 
           <ul class="navbar-nav mr-sm-2 nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/create"><i class="fa fa-cloud-upload-alt"></i>Create<span class="sr-only">(current)</span></a>
-            </li>
+            <form class="form-inline">
+            <div class="md-form mt-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+              <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+            </form>
           </ul>
 
         </div>
