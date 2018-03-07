@@ -21,7 +21,7 @@ func GetServices(w http.ResponseWriter, r *http.Request) {
 		Service global.ServiceList
 	}
 	ClusterDatas := ClusterVars{Service: services}
-	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/services.tmpl.html")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/list/services.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

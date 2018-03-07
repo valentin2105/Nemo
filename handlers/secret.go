@@ -17,7 +17,7 @@ func GetSecrets(w http.ResponseWriter, r *http.Request) {
 		Secret global.SecretList
 	}
 	ClusterDatas := ClusterVars{Secret: secrets}
-	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/secrets.tmpl.html")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/list/secrets.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

@@ -22,7 +22,7 @@ func GetPods(w http.ResponseWriter, r *http.Request) {
 		Pod global.PodList
 	}
 	ClusterDatas := ClusterVars{Pod: pods}
-	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/pods.tmpl.html")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/list/pods.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return

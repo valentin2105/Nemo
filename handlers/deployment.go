@@ -17,7 +17,7 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 		Deployment global.DeploymentList
 	}
 	ClusterDatas := ClusterVars{Deployment: deployment}
-	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/deployments.tmpl.html")
+	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/list/deployments.tmpl.html")
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return
