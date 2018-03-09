@@ -38,7 +38,6 @@ chmod +x Nemo
 
 ## Screenshots
 
-<br>
 <img src="https://i.imgur.com/Xc5y7Im.png" width="646" height="440">
 
 ## How to build it
