@@ -87,6 +87,12 @@ func (app *Application) mux() *gorilla_mux.Router {
 		ns := vars["namespace"]
 		handlers.DeleteAnyPod(w, r, ns, name)
 	}).Methods("DELETE")
+	router.HandleFunc("/delete/{namespace}/deployment/{name}", func(w http.ResponseWriter, r *http.Request) {
+		vars := gorilla_mux.Vars(r)
+		name := vars["name"]
+		ns := vars["namespace"]
+		handlers.DeleteAnyDeployment(w, r, ns, name)
+	}).Methods("DELETE")
 
 	// Path of static files must be last!
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))

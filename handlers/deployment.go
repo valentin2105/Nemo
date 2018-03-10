@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"html/template"
+	"io"
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
@@ -40,4 +41,17 @@ func GetAnyDeployment(w http.ResponseWriter, r *http.Request, ns string, name st
 	ip := r.RemoteAddr
 	logrus.Infoln("GET /get/" + ns + "/deployment/" + name + " from " + ip)
 
+}
+
+// DeleteAnyDeployment - Generate the Deployment describe view
+func DeleteAnyDeployment(w http.ResponseWriter, r *http.Request, ns string, name string) {
+	w.Header().Set("Content-Type", "text/html")
+	err := global.DeleteDeployment(ns, name)
+	if err != nil {
+		libhttp.HandleErrorJson(w, err)
+		return
+	}
+	ip := r.RemoteAddr
+	io.WriteString(w, "Done")
+	logrus.Infoln("DELETE /delete/" + ns + "/deployment/" + name + " from " + ip)
 }

@@ -1,15 +1,15 @@
-function DeletePod(ns, name) {
+function DeleteComponent(what, ns, name) {
   jQuery.ajax({
     type: 'DELETE',
-    url: '/delete/' + ns + '/pod/' + name,
+    url: '/delete/' + ns + '/' + what + '/' + name,
     success: function(data){
-      SuccessDelete(name, "Pod");
+      SuccessDelete(name, what);
       setTimeout(function() {
-        window.location.replace("/pods");
+        window.location.replace('/' + what + 's');
       }, 1000);
     },
     error: function(data){
-          FailDelete(name, "Pod");
+          FailDelete(name, what);
     }
   });
 }

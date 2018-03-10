@@ -46,7 +46,7 @@
       </div>
       <div class="modal-body">
         <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-danger">Yes, Delete the deployment</button>
+        <button type="button" class="btn btn-danger"  onclick="DeleteComponent('deployment', {{.Namespace}}, {{.Name}})">Yes, Delete the deployment</button>
       </div>
     </div>
   </div>
