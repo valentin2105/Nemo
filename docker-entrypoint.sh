@@ -8,6 +8,5 @@ kubectl config set-cluster k8s --server=https://${KUBERNETES_SERVICE_HOST}:${KUB
 kubectl config set-credentials scheduler --token=${KUBERNETES_TOKEN}
 kubectl config set-context default-context --cluster=k8s --user=scheduler
 kubectl config use-context default-context
-kubectl get cs
 
 ./Nemo --kubeconfig=/root/.kube/config --addr :8080

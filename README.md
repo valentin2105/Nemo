@@ -17,25 +17,8 @@
 `Nemo` is writted in Golang and use a `kubeconfig` file to talk to Kubernetes.
 
 ## How to use it
-You can launch locally with:
 
-```
-# local
-git clone https://github.com/valentin2105/Nemo.git
-cd Nemo/ && wget https://...
-chmod +x Nemo
-./Nemo --kubeconfig /home/user/.kube/config
-```
-
-You can run it in your Kubernetes cluster using `ServiceAccount` and `RBAC` in combination with `Helm`.
-
-```
-# Helm
-git clone https://github.com/valentin2105/Nemo.git
-cd Nemo/helm
-helm install -n nemo --namespace nemo-ui .
-```
-Or via a simple `docker run` command :
+You can launch easily with a simple `docker run` command :
 
 ```
  docker run -it -p 80:8080 -e KUBERNETES_SERVICE_HOST=k8s-api.domain.ltd \
@@ -44,9 +27,17 @@ Or via a simple `docker run` command :
     valentinnc/nemo
 ```
 
+Or you can launch it locally, without Docker :
+```
+# local
+git clone https://github.com/valentin2105/Nemo.git
+cd Nemo/ && wget https://...
+chmod +x Nemo
+./Nemo --kubeconfig /home/user/.kube/config
+```
+
 ## Screenshots
 
-<br>
 <img src="https://i.imgur.com/Xc5y7Im.png" width="646" height="440">
 
 ## How to build it
