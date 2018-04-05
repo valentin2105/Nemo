@@ -149,6 +149,18 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/valentin2105/Nemo"
+  packages = [
+    "application",
+    "global",
+    "handlers",
+    "libhttp",
+    "middlewares"
+  ]
+  revision = "f8e7aac52d76f8a4401b86c0968b61cdf06bd70d"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
   revision = "c7dcf104e3a7a1417abc0230cb0d5240d764159d"
@@ -203,6 +215,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a49c93eae9089016b7753d3c838acdec7c192a766fcdf3701e061365e16800cc"
+  inputs-digest = "f93b6fba970fe400ee47f34614f17c3bb77464f0315abf9c792b51c7ee36435e"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -4,3 +4,4 @@ Nemo.exe
 vendor/
 tls/
 helm/
+Gopkg.lock
