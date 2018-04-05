@@ -1,5 +1,6 @@
 PNotify.prototype.options.styling = "fontawesome"
 PNotify.prototype.options.delay -= 5000;
+
 function SuccessDelete(name, type) {
   new PNotify({
   title: type + ' deleted.',
