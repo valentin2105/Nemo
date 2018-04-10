@@ -42,7 +42,7 @@ func ListDeployments() DeploymentList {
 		for _, deployments := range deployments.Items {
 			//Name
 			n := *deployments.Metadata.Name
-			nc := global.global.TrimQuotes(n)
+			nc := global.TrimQuotes(n)
 			// Namespace
 			ns := *deployments.Metadata.Namespace
 			nsc := global.TrimQuotes(ns)

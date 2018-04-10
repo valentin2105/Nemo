@@ -42,7 +42,7 @@ func ListConfigmaps() ConfigmapList {
 		c := configmaps.Metadata.GetCreationTimestamp()
 		cs := c.GetSeconds()
 		csc := time.Unix(cs, 0)
-		cscf := csc.Format(DefaultDateFormat)
+		cscf := csc.Format(global.DefaultDateFormat)
 
 		// Put in slice
 		p := Configmap{Name: nc, Namespace: nsc, Created: cscf}

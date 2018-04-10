@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/valentin2105/Nemo/global"
+	"github.com/valentin2105/Nemo/global/k8s"
 	"github.com/valentin2105/Nemo/libhttp"
 )
 

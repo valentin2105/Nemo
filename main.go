@@ -12,7 +12,7 @@ import (
 	"github.com/tylerb/graceful"
 
 	"github.com/valentin2105/Nemo/application"
-	"github.com/valentin2105/Nemo/global"
+	k8s "github.com/valentin2105/Nemo/global/k8s"
 )
 
 var (
@@ -60,7 +60,7 @@ func main() {
 	}
 
 	//Checks before start
-	client, err := global.LoadClient(global.Kubeconfig)
+	client, err := k8s.LoadClient(k8s.Kubeconfig)
 	if err != nil {
 		logrus.Fatal(err)
 	}

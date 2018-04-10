@@ -8,7 +8,8 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/spf13/viper"
 
-	"github.com/valentin2105/Nemo/handlers"
+	handlers "github.com/valentin2105/Nemo/handlers"
+	k8s "github.com/valentin2105/Nemo/handlers/k8s"
 	"github.com/valentin2105/Nemo/middlewares"
 )
 
@@ -19,7 +20,7 @@ func New(config *viper.Viper) (*Application, error) {
 	app := &Application{}
 	app.config = config
 	app.sessionStore = sessions.NewCookieStore([]byte(cookieStoreSecret))
-
+	return app, nil
 }
 
 // Application is the application object that runs HTTP server.
@@ -49,48 +50,48 @@ func (app *Application) mux() *gorilla_mux.Router {
 	// Create
 	router.Handle("/create", http.HandlerFunc(handlers.Create)).Methods("GET")
 	// List
-	router.Handle("/pods", http.HandlerFunc(handlers.GetPods)).Methods("GET")
-	router.Handle("/deployments", http.HandlerFunc(handlers.GetDeployments)).Methods("GET")
-	router.Handle("/services", http.HandlerFunc(handlers.GetServices)).Methods("GET")
-	router.Handle("/volumes", http.HandlerFunc(handlers.GetVolumes)).Methods("GET")
-	router.Handle("/configmaps", http.HandlerFunc(handlers.GetConfigmaps)).Methods("GET")
-	router.Handle("/secrets", http.HandlerFunc(handlers.GetSecrets)).Methods("GET")
+	router.Handle("/pods", http.HandlerFunc(k8s.GetPods)).Methods("GET")
+	router.Handle("/deployments", http.HandlerFunc(k8s.GetDeployments)).Methods("GET")
+	router.Handle("/services", http.HandlerFunc(k8s.GetServices)).Methods("GET")
+	router.Handle("/volumes", http.HandlerFunc(k8s.GetVolumes)).Methods("GET")
+	router.Handle("/configmaps", http.HandlerFunc(k8s.GetConfigmaps)).Methods("GET")
+	router.Handle("/secrets", http.HandlerFunc(k8s.GetSecrets)).Methods("GET")
 	// Get
 	router.HandleFunc("/get/{namespace}/pod/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
 		ns := vars["namespace"]
 		name := vars["name"]
-		handlers.GetAnyPod(w, r, ns, name)
+		k8s.GetAnyPod(w, r, ns, name)
 	}).Methods("GET")
 	router.HandleFunc("/get/{namespace}/deployment/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
 		ns := vars["namespace"]
 		name := vars["name"]
-		handlers.GetAnyDeployment(w, r, ns, name)
+		k8s.GetAnyDeployment(w, r, ns, name)
 	}).Methods("GET")
 	router.HandleFunc("/get/{namespace}/service/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
 		ns := vars["namespace"]
 		name := vars["name"]
-		handlers.GetAnyService(w, r, ns, name)
+		k8s.GetAnyService(w, r, ns, name)
 	}).Methods("GET")
 	router.HandleFunc("/get/node/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
 		name := vars["name"]
-		handlers.GetAnyNode(w, r, name)
+		k8s.GetAnyNode(w, r, name)
 	}).Methods("GET")
 	// Delete
 	router.HandleFunc("/delete/{namespace}/pod/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
 		name := vars["name"]
 		ns := vars["namespace"]
-		handlers.DeleteAnyPod(w, r, ns, name)
+		k8s.DeleteAnyPod(w, r, ns, name)
 	}).Methods("DELETE")
 	router.HandleFunc("/delete/{namespace}/deployment/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)
 		name := vars["name"]
 		ns := vars["namespace"]
-		handlers.DeleteAnyDeployment(w, r, ns, name)
+		k8s.DeleteAnyDeployment(w, r, ns, name)
 	}).Methods("DELETE")
 
 	// Path of static files must be last!

@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/valentin2105/Nemo/global"
 	"github.com/valentin2105/Nemo/global/k8s"
 	"github.com/valentin2105/Nemo/libhttp"
 )
@@ -14,11 +13,11 @@ import (
 func GetHome(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	type ClusterVars struct {
-		Node            k8s.NodeList
-		ComponentStatus k8s.ComponentStatusList
+		Node            global.NodeList
+		ComponentStatus global.ComponentStatusList
 	}
-	components := k8s.ListComponentStatus()
-	nodes, err := k8s.ListNodes()
+	components := global.ListComponentStatus()
+	nodes, err := global.ListNodes()
 	if err != nil {
 		libhttp.HandleErrorJson(w, err)
 		return
