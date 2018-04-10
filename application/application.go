@@ -20,7 +20,6 @@ func New(config *viper.Viper) (*Application, error) {
 	app.config = config
 	app.sessionStore = sessions.NewCookieStore([]byte(cookieStoreSecret))
 
-	return app, nil
 }
 
 // Application is the application object that runs HTTP server.

@@ -6,7 +6,8 @@ GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 BINARY_NAME=Nemo
 BINARY_UNIX=$(BINARY_NAME)
-KUBECONFIG=/Users/Valentin/.kube/config
+DOCKER_IMAGE=valentinnc/nemo
+KUBECONFIG=/home/valentin/.kube/config
 
 build:
 				$(GOBUILD) -o $(BINARY_NAME) -v
@@ -32,5 +33,6 @@ all: test build
 build-linux:
 				CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
 
-docker-build:
-				docker build -t valentinnc/nemo .
+build-docker:
+				docker build -t $(DOCKER_IMAGE) .
+				docker push $(DOCKER_IMAGE)
