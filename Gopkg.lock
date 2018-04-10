@@ -153,11 +153,12 @@
   packages = [
     "application",
     "global",
+    "global/k8s",
     "handlers",
     "libhttp",
     "middlewares"
   ]
-  revision = "f8e7aac52d76f8a4401b86c0968b61cdf06bd70d"
+  revision = "fe713229afaecaf99043b495420f4c4f012ebcd0"
 
 [[projects]]
   branch = "master"
@@ -215,6 +216,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f93b6fba970fe400ee47f34614f17c3bb77464f0315abf9c792b51c7ee36435e"
+  inputs-digest = "f7768711f6cf0ede0c94c2acee2e7037144e1428b6770e19848dff4289d2b4dd"
   solver-name = "gps-cdcl"
   solver-version = 1
