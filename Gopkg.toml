@@ -1,3 +1,23 @@
+[[constraint]]
+  branch = "master"
+  name = "github.com/carbocation/interpose"
+
+[[constraint]]
+  name = "github.com/ericchiang/k8s"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/ghodss/yaml"
+  version = "1.0.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/tylerb/graceful"
+
+[prune]
+  go-tests = true
+ unused-packages = true
+
 # Gopkg.toml example
 #
 # Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
@@ -25,22 +45,3 @@
 #   unused-packages = true
 
 
-[[constraint]]
-  branch = "master"
-  name = "github.com/carbocation/interpose"
-
-[[constraint]]
-  name = "github.com/ericchiang/k8s"
-  version = "1.0.0"
-
-[[constraint]]
-  name = "github.com/ghodss/yaml"
-  version = "1.0.0"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/tylerb/graceful"
-
-[prune]
-  go-tests = true
- unused-packages = true
