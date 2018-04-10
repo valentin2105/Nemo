@@ -38,7 +38,7 @@ chmod +x Nemo
 
 ## Screenshots
 
-<img src="https://i.imgur.com/Xc5y7Im.png" width="646" height="440">
+<img src="" width="646" height="440">
 
 ## How to build it
 `Nemo` uses `dep` to fetch Go dependencies:
