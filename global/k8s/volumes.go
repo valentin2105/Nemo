@@ -6,6 +6,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // PVC - kubectl get pvc
@@ -46,16 +47,16 @@ func ListPVC() PVClist {
 	for _, PVCs := range PVCs.Items {
 		//Name
 		n := *PVCs.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns := *PVCs.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		// Status
 		si := PVCs.Spec.Size()
 		sic := strconv.Itoa(si)
 		// Status
 		s := PVCs.Status.GetPhase()
-		sc := TrimQuotes(s)
+		sc := global.TrimQuotes(s)
 		// Put in slice
 		p := PVC{Name: nc, Namespace: nsc, Status: sc, Size: sic}
 		pvcl = append(pvcl, p)
@@ -78,13 +79,13 @@ func ListPV() PVlist {
 	for _, PVs := range PVs.Items {
 		//Name
 		n := *PVs.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Status
 		si := PVs.Status.Size()
 		sic := strconv.Itoa(si)
 		// Status
 		s := PVs.Status.GetPhase()
-		sc := TrimQuotes(s)
+		sc := global.TrimQuotes(s)
 		// Put in slice
 		p := PV{Name: nc, Status: sc, Size: sic}
 		pvl = append(pvl, p)

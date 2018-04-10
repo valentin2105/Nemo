@@ -7,6 +7,7 @@ import (
 	"github.com/ericchiang/k8s"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 	metav1 "github.com/ericchiang/k8s/apis/meta/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // Pod - kubectl get pod
@@ -39,16 +40,16 @@ func ListPods() (PodList, error) {
 	for _, pods := range pods.Items {
 		//Status
 		s := *pods.Status.Phase
-		sc := TrimQuotes(s)
+		sc := global.TrimQuotes(s)
 		//Name
 		n := *pods.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns := *pods.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		//Worker
 		w := *pods.Spec.NodeName
-		wc := TrimQuotes(w)
+		wc := global.TrimQuotes(w)
 		// Put in slice
 		p := Pod{Status: sc, Name: nc, Namespace: nsc, Worker: wc}
 		pl = append(pl, p)
@@ -71,15 +72,15 @@ func GetPod(ns string, name string) (Pod, error) {
 	}
 	//Status
 	s := *pod.Status.Phase
-	sc := TrimQuotes(s)
+	sc := global.TrimQuotes(s)
 	//Name
 	n := *pod.Metadata.Name
-	nc := TrimQuotes(n)
+	nc := global.TrimQuotes(n)
 	// Namespace
-	nsc := TrimQuotes(ns)
+	nsc := global.TrimQuotes(ns)
 	//Worker
 	w := *pod.Spec.NodeName
-	wc := TrimQuotes(w)
+	wc := global.TrimQuotes(w)
 	//IP
 	ip := pod.Status.GetPodIP()
 	//Image

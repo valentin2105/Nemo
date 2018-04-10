@@ -8,6 +8,7 @@ import (
 	appsv1 "github.com/ericchiang/k8s/apis/apps/v1"
 	appsv1beta1 "github.com/ericchiang/k8s/apis/apps/v1beta1"
 	metav1 "github.com/ericchiang/k8s/apis/meta/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // Deployment - kubectl get deployments
@@ -41,10 +42,10 @@ func ListDeployments() DeploymentList {
 		for _, deployments := range deployments.Items {
 			//Name
 			n := *deployments.Metadata.Name
-			nc := TrimQuotes(n)
+			nc := global.global.TrimQuotes(n)
 			// Namespace
 			ns := *deployments.Metadata.Namespace
-			nsc := TrimQuotes(ns)
+			nsc := global.TrimQuotes(ns)
 			// PodWanted
 			pw := *deployments.Status.Replicas
 			// PodRunning
@@ -63,10 +64,10 @@ func ListDeployments() DeploymentList {
 	for _, deployments := range deployments.Items {
 		//Name
 		n := *deployments.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns := *deployments.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		// PodWanted
 		pw := *deployments.Status.Replicas
 		// PodRunning
@@ -98,10 +99,10 @@ func GetDeployment(ns string, name string) Deployment {
 		}
 		//Name
 		n := *deployment.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns = *deployment.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		// PodWanted
 		pw := *deployment.Status.Replicas
 		// PodRunning
@@ -117,10 +118,10 @@ func GetDeployment(ns string, name string) Deployment {
 	}
 	//Name
 	n := *deployment.Metadata.Name
-	nc := TrimQuotes(n)
+	nc := global.TrimQuotes(n)
 	// Namespace
 	ns = *deployment.Metadata.Namespace
-	nsc := TrimQuotes(ns)
+	nsc := global.TrimQuotes(ns)
 	// PodWanted
 	pw := *deployment.Status.Replicas
 	// PodRunning

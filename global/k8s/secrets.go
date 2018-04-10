@@ -6,6 +6,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // Secret - kubectl get secret
@@ -33,10 +34,10 @@ func ListSecrets() SecretList {
 	for _, secrets := range secrets.Items {
 		//Name
 		n := *secrets.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns := *secrets.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		//Created
 		c := secrets.Metadata.GetCreationTimestamp()
 		cs := c.GetSeconds()

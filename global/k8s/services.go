@@ -6,6 +6,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // Service - kubectl get service
@@ -38,19 +39,19 @@ func ListServices() (ServiceList, error) {
 	for _, services := range services.Items {
 		//Name
 		n := *services.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns := *services.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		// IP
 		i := services.Spec.GetClusterIP()
-		ic := TrimQuotes(i)
+		ic := global.TrimQuotes(i)
 		// Port
 		po := fmt.Sprintf("%q", services.Spec.GetPorts())
-		poc := TrimQuotes(po)
+		poc := global.TrimQuotes(po)
 		// Type
 		t := services.Spec.GetType()
-		tc := TrimQuotes(t)
+		tc := global.TrimQuotes(t)
 		// Put in slice
 		s := Service{Name: nc, Namespace: nsc, IP: ic, Port: poc, Type: tc}
 		sl = append(sl, s)
@@ -73,19 +74,19 @@ func GetService(ns string, name string) (Service, error) {
 	}
 	//Name
 	n := *service.Metadata.Name
-	nc := TrimQuotes(n)
+	nc := global.TrimQuotes(n)
 	// Namespace
 	ns = *service.Metadata.Namespace
-	nsc := TrimQuotes(ns)
+	nsc := global.TrimQuotes(ns)
 	// IP
 	i := service.Spec.GetClusterIP()
-	ic := TrimQuotes(i)
+	ic := global.TrimQuotes(i)
 	// Port
 	po := fmt.Sprintf("%q", service.Spec.GetPorts())
-	poc := TrimQuotes(po)
+	poc := global.TrimQuotes(po)
 	// Type
 	t := service.Spec.GetType()
-	tc := TrimQuotes(t)
+	tc := global.TrimQuotes(t)
 	// Put in slice
 	s = Service{Name: nc, Namespace: nsc, IP: ic, Port: poc, Type: tc}
 	return s, err

@@ -6,6 +6,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // Configmap - kubectl get configmap
@@ -33,10 +34,10 @@ func ListConfigmaps() ConfigmapList {
 	for _, configmaps := range configmaps.Items {
 		//Name
 		n := *configmaps.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Namespace
 		ns := *configmaps.Metadata.Namespace
-		nsc := TrimQuotes(ns)
+		nsc := global.TrimQuotes(ns)
 		//Created
 		c := configmaps.Metadata.GetCreationTimestamp()
 		cs := c.GetSeconds()

@@ -10,6 +10,7 @@ import (
 	"github.com/ericchiang/k8s"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
 	"github.com/ghodss/yaml"
+	"github.com/valentin2105/Nemo/global"
 )
 
 var (
@@ -60,12 +61,12 @@ func ListComponentStatus() ComponentStatusList {
 		var st string
 		for _, stat := range status {
 			if *stat.Type == "Healthy" || *stat.Type == "Unhealthy" {
-				st = TrimQuotes(*stat.Type)
+				st = global.TrimQuotes(*stat.Type)
 			}
 		}
 		//Name
 		n := *component.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 		// Put in slice
 		no := ComponentStatus{Status: st, Name: nc}
 		nl = append(nl, no)

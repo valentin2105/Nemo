@@ -5,6 +5,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	corev1 "github.com/ericchiang/k8s/apis/core/v1"
+	"github.com/valentin2105/Nemo/global"
 )
 
 // Node - kubectl get node
@@ -36,12 +37,12 @@ func ListNodes() (NodeList, error) {
 		var st string
 		for _, stat := range status {
 			if *stat.Type == "Ready" || *stat.Type == "NotReady" {
-				st = TrimQuotes(*stat.Type)
+				st = global.TrimQuotes(*stat.Type)
 			}
 		}
 		//Name
 		n := *node.Metadata.Name
-		nc := TrimQuotes(n)
+		nc := global.TrimQuotes(n)
 
 		//Spec
 		//sp := node.Status.GetAllocatable()
@@ -73,12 +74,12 @@ func GetNode(name string) (Node, error) {
 	var st string
 	for _, stat := range status {
 		if *stat.Type == "Ready" || *stat.Type == "NotReady" {
-			st = TrimQuotes(*stat.Type)
+			st = global.TrimQuotes(*stat.Type)
 		}
 	}
 	//Name
 	n := *node.Metadata.Name
-	nc := TrimQuotes(n)
+	nc := global.TrimQuotes(n)
 
 	//Spec
 	//sp := node.Status.GetAllocatable()
