@@ -14,6 +14,8 @@
         <tr>
           <th>Status</th>
           <th>Name <i class="fa fa-angle-down"></i></th>
+          <th>Operating System <i class="fa fa-angle-down"></i></th>
+          <th>Labels <i class="fa fa-angle-down"></i></th>
           <th>Schedulable <i class="fa fa-angle-down"></i></th>
         </tr>
       </thead>
@@ -21,6 +23,8 @@
         <tr>
           <td><i class="fa fa-circle {{.Status}}"></i> {{.Status}}</td>
           <td>{{.Name}}</td>
+          <td>{{.OS}}</td>
+          <td>{{.Labels}}</td>
           <td>{{.Schedulable}}</td>
         </tr>
       </tbody>

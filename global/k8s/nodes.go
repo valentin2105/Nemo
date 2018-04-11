@@ -12,6 +12,8 @@ import (
 type Node struct {
 	Status      string
 	Name        string
+	Labels      map[string]string
+	OS          string
 	Schedulable bool
 }
 
@@ -84,9 +86,16 @@ func GetNode(name string) (Node, error) {
 	//Spec
 	//sp := node.Status.GetAllocatable()
 
+	//Labels
+	la := node.Metadata.Labels
+
+	//
+	os := node.Status.NodeInfo.GetOsImage()
+	osc := global.TrimQuotes(os)
+
 	sch := !*node.Spec.Unschedulable
 	// Put in slice
-	no = Node{Status: st, Name: nc, Schedulable: sch}
+	no = Node{Status: st, Name: nc, Labels: la, OS: osc, Schedulable: sch}
 
 	return no, err
 }
