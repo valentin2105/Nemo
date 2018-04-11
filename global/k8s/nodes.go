@@ -83,15 +83,14 @@ func GetNode(name string) (Node, error) {
 	n := *node.Metadata.Name
 	nc := global.TrimQuotes(n)
 
-	//Spec
-	//sp := node.Status.GetAllocatable()
-
 	//Labels
 	la := node.Metadata.Labels
 
-	//
+	//OsImage
 	os := node.Status.NodeInfo.GetOsImage()
 	osc := global.TrimQuotes(os)
+
+	//capa := node.Status.GetCapacity()
 
 	sch := !*node.Spec.Unschedulable
 	// Put in slice
