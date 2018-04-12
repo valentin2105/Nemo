@@ -33,7 +33,7 @@ func GetHome(w http.ResponseWriter, r *http.Request) {
 	logrus.Infoln("GET / from " + ip)
 }
 
-// NotFound - Generate the home view
+// NotFound - Generate the 404 view.
 func NotFound(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	tmpl, err := template.ParseFiles("templates/_head.tmpl.html", "templates/404.tmpl.html")
@@ -45,5 +45,5 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, data)
 	ip := r.RemoteAddr
 	path := r.RequestURI
-	logrus.Infoln("GET " + path + " from " + ip)
+	logrus.Infoln("GET " + path + " from " + ip + "(404)")
 }

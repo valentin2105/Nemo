@@ -42,9 +42,6 @@ func (app *Application) MiddlewareStruct() (*interpose.Middleware, error) {
 func (app *Application) mux() *gorilla_mux.Router {
 	router := gorilla_mux.NewRouter()
 
-	// All other Routes -> 404
-	router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
-
 	// HTTP Routes
 	router.Handle("/", http.HandlerFunc(handlers.GetHome)).Methods("GET")
 	// Create
@@ -94,7 +91,12 @@ func (app *Application) mux() *gorilla_mux.Router {
 		k8s.DeleteAnyDeployment(w, r, ns, name)
 	}).Methods("DELETE")
 
+	// All other Routes -> 404
+	router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
+
 	// Path of static files must be last!
-	router.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))
+	router.PathPrefix("/project/").Handler(http.StripPrefix("/project/", http.FileServer(http.Dir("./static/project/"))))
+	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", http.FileServer(http.Dir("./static/images/"))))
+
 	return router
 }
