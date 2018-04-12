@@ -95,7 +95,8 @@ func (app *Application) mux() *gorilla_mux.Router {
 	router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
 
 	// Path of static files must be last!
-	router.PathPrefix("/project/").Handler(http.StripPrefix("/project/", http.FileServer(http.Dir("./static/project/"))))
+	router.PathPrefix("/project/css/").Handler(http.StripPrefix("/project/css/", http.FileServer(http.Dir("./static/project/css/"))))
+	router.PathPrefix("/project/js/").Handler(http.StripPrefix("/project/js/", http.FileServer(http.Dir("./static/project/js/"))))
 	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", http.FileServer(http.Dir("./static/images/"))))
 
 	return router
