@@ -33,8 +33,8 @@ func LoadClient(kubeconfigPath *string) (*k8s.Client, error) {
 	path := string(*kubeconfigPath)
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("read kubeconfig: %v", err)
 		logrus.Warn("Error " + err.Error())
+		return nil, fmt.Errorf("read kubeconfig: %v", err)
 	}
 	// Unmarshal YAML into a Kubernetes config object.
 	var config k8s.Config
