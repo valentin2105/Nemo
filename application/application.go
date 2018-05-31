@@ -53,6 +53,7 @@ func (app *Application) mux() *gorilla_mux.Router {
 	router.Handle("/volumes", http.HandlerFunc(k8s.GetVolumes)).Methods("GET")
 	router.Handle("/configmaps", http.HandlerFunc(k8s.GetConfigmaps)).Methods("GET")
 	router.Handle("/secrets", http.HandlerFunc(k8s.GetSecrets)).Methods("GET")
+	router.Handle("/ingresses", http.HandlerFunc(k8s.GetIngresses)).Methods("GET")
 	// Get
 	router.HandleFunc("/get/{namespace}/pod/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := gorilla_mux.Vars(r)

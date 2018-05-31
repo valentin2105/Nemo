@@ -36,21 +36,21 @@ func ListServices() (ServiceList, error) {
 		logrus.Warn("Error " + err.Error())
 		return sl, err
 	}
-	for _, services := range services.Items {
+	for _, service := range services.Items {
 		//Name
-		n := *services.Metadata.Name
+		n := *service.Metadata.Name
 		nc := global.TrimQuotes(n)
 		// Namespace
-		ns := *services.Metadata.Namespace
+		ns := *service.Metadata.Namespace
 		nsc := global.TrimQuotes(ns)
 		// IP
-		i := services.Spec.GetClusterIP()
+		i := service.Spec.GetClusterIP()
 		ic := global.TrimQuotes(i)
 		// Port
-		po := fmt.Sprintf("%q", services.Spec.GetPorts())
+		po := fmt.Sprintf("%q", service.Spec.GetPorts())
 		poc := global.TrimQuotes(po)
 		// Type
-		t := services.Spec.GetType()
+		t := service.Spec.GetType()
 		tc := global.TrimQuotes(t)
 		// Put in slice
 		s := Service{Name: nc, Namespace: nsc, IP: ic, Port: poc, Type: tc}
