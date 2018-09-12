@@ -41,7 +41,6 @@ func (app *Application) MiddlewareStruct() (*interpose.Middleware, error) {
 
 func (app *Application) mux() *gorilla_mux.Router {
 	router := gorilla_mux.NewRouter()
-
 	// HTTP Routes
 	router.Handle("/", http.HandlerFunc(handlers.GetHome)).Methods("GET")
 	// Create

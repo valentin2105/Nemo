@@ -7,7 +7,7 @@ GOGET=$(GOCMD) get
 BINARY_NAME=Nemo
 BINARY_UNIX=$(BINARY_NAME)
 DOCKER_IMAGE=valentinnc/nemo
-KUBECONFIG=/home/valentin/.kube/config
+KUBECONFIG=/Users/Valentin/.kube/config
 
 build:
 				$(GOBUILD) -o $(BINARY_NAME) -v

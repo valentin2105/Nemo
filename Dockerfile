@@ -10,7 +10,7 @@ RUN go get -u github.com/golang/dep/cmd/dep \
 
 
 FROM alpine:latest
-ENV KUBE_LATEST_VERSION="v1.9.4"
+ENV KUBE_LATEST_VERSION="v1.10.4"
 RUN  apk update \
      && apk --no-cache add ca-certificates bash curl \
      && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
